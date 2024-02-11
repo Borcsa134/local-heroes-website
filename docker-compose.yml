@@ -1,0 +1,19 @@
+version: '3'
+services:
+  base-frontend:
+    build: ./
+    image: base
+    working_dir: /usr/src/app/
+    environment:
+      - "NEXT_WEBPACK_USEPOLLING=1"
+    volumes:
+      - ./:/usr/src/app/
+      - /usr/src/app/node_modules/
+    ports:
+      - 3000:3000
+    networks:
+      - base-network
+    command: npm run dev
+networks:
+  base-network:
+    external: true
