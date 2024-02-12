@@ -1,9 +1,8 @@
-# Base web application project - Frontend
-
-Base project for every web application on Borcsa134 repository.
+# Local Heroes Website
 
 ## Usage
 
+- Create docker network with `docker network create lh-network`.
 - Build the application with `make build` or `nmake build`.
 - Start the app with `make start` or `nmake start`.
 - It is hosted on `localhost:3000`.
