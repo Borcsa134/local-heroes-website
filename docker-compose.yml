@@ -1,6 +1,6 @@
 version: '3'
 services:
-  base-frontend:
+  lh-frontend:
     build: ./
     image: base
     working_dir: /usr/src/app/
