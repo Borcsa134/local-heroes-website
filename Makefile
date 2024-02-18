@@ -33,6 +33,9 @@ sh:
 test:
 	docker compose exec $(container) /bin/sh -c "npm run test"
 
+lint:
+	docker compose exec $(container) /bin/sh -c "npm run lint"
+
 # check console output
 logs:
 	docker compose logs -f

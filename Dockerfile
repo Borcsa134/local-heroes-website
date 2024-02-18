@@ -1,7 +1,7 @@
 FROM node:19-alpine3.16
 
 RUN apk update && apk upgrade
-RUN apk add chromium vim 
+RUN apk add chromium vim git 
 
 ENV CHROME_BIN=/usr/bin/chromium-browser
 
