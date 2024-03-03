@@ -5,7 +5,8 @@ services:
     image: base
     working_dir: /usr/src/app/
     environment:
-      - "NEXT_WEBPACK_USEPOLLING=1"
+      - 'NEXT_WEBPACK_USEPOLLING=1'
+      - 'DISCORD_URL=${DISCORD_URL}'
     volumes:
       - ./:/usr/src/app/
       - /usr/src/app/node_modules/
