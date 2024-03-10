@@ -1,4 +1,4 @@
-function Footer() {
+export default function Footer() {
   return (
     <footer className="flex flex-row items-center justify-center">
       <p>
@@ -7,4 +7,3 @@ function Footer() {
     </footer>
   );
 }
-export default Footer;
