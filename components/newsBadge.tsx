@@ -1,7 +1,15 @@
 import { Card, CardBody } from '@nextui-org/card';
 import { Image } from '@nextui-org/image';
+import { OstDocument } from 'outstatic';
 
-export default function NewsBadge(news) {
+type Props = {
+  news: OstDocument<{
+    [key: string]: unknown;
+  }>;
+};
+
+export default function NewsBadge(props: Props) {
+  const { news } = props;
   return (
     <Card className="py-4">
       <CardBody className="flex flex-row overflow-visible py-2">

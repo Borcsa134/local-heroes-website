@@ -1,6 +1,7 @@
-import NewsBadge from '@/components/newsBadge';
 import Link from 'next/link';
 import { getDocuments } from 'outstatic/server';
+
+import NewsBadge from '@/components/newsBadge';
 
 export default async function News() {
   const newsList = await getData();
@@ -11,7 +12,7 @@ export default async function News() {
         {newsList.map((news) => (
           <li key={news.slug}>
             <Link href={'/news/' + news.slug} className="w-100">
-              <NewsBadge {...news} />
+              <NewsBadge news={news} />
             </Link>
           </li>
         ))}
