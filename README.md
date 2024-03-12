@@ -1,4 +1,4 @@
-# Local Heroes Website
+# Local Heroes Website - Next.js
 
 ## Usage
 
