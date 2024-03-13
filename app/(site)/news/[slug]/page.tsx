@@ -31,12 +31,13 @@ async function getData({ params }: Params) {
 }
 
 export default async function News(params: Params) {
-  const post = await getData(params);
+  const news = await getData(params);
+  const date = new Date(news.publishedAt);
   return (
     <div>
-      <h1 className="text-4xl text-center py-4">{post.title}</h1>
-      <p className="text-center">{post.publishedAt}</p>
-      <div dangerouslySetInnerHTML={{ __html: post.content }} className="pt-4" />
+      <h1 className="text-4xl text-center py-4">{news.title}</h1>
+      <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>
+      <div dangerouslySetInnerHTML={{ __html: news.content }} className="pt-4" />
     </div>
   );
 }

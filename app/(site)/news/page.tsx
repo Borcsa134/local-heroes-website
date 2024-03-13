@@ -6,7 +6,7 @@ import NewsBadge from '@/components/newsBadge';
 export default async function News() {
   const newsList = await getData();
   return (
-    <div>
+    <div className="lg:w-[990px]">
       <h1 className="text-4xl text-center py-4">Hírek</h1>
       <ul>
         {newsList.map((news) => (
@@ -22,7 +22,7 @@ export default async function News() {
 }
 
 async function getData() {
-  const news = getDocuments('news', ['title', 'slug', 'coverImage', 'content']);
+  const news = getDocuments('news', ['title', 'slug', 'coverImage', 'publishedAt']);
 
   return news;
 }

@@ -8,7 +8,7 @@ wait_for_input=read
 # \
 !endif
 
-container=base-frontend
+container=lh-frontend
 
 # start all the containers
 start:

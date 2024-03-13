@@ -1,13 +1,35 @@
+'use client';
 import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from '@nextui-org/link';
-import { Navbar, NavbarContent, NavbarItem } from '@nextui-org/navbar';
+import { Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/navbar';
 import Image from 'next/image';
+import React from 'react';
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const discordUrl = process.env.DISCORD_URL;
+  const outsideLinkIcon = <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-4 pl-2" />;
+  const menuItems = [
+    ['Kezdőlap', '/'],
+    ['Hírek', '/news'],
+    ['Események', '/'],
+    ['Szerepjáték', '/'],
+    ['Magic Est', '/'],
+    [['Discord ', outsideLinkIcon], `${discordUrl}`, true],
+    ['A körről', '/'],
+  ];
   return (
-    <div className="container mx-auto px-2 lg: px-4">
-      <Navbar isBordered shouldHideOnScroll classNames={{ wrapper: 'w-[990px] justify-between' }}>
+    <div className="container mx-auto px-2 lg:px-4">
+      <Navbar
+        isBordered
+        shouldHideOnScroll
+        onMenuOpenChange={setIsMenuOpen}
+        classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
+      >
+        <NavbarContent className="sm:hidden" justify="start">
+          <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
+        </NavbarContent>
         <NavbarContent className="hidden gap-4 sm:flex sm:leading-[4rem] " justify="center">
           <NavbarItem>
             <Link href="/">
@@ -39,6 +61,15 @@ export default function Header() {
             <Link href="/">A körről</Link>
           </NavbarItem>
         </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${index}`}>
+              <Link className="w-full" href={item[1] as string} size="lg" target={item[2] ? '_blank' : '_self'}>
+                {item[0]}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
       </Navbar>
     </div>
   );

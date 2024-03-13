@@ -9,6 +9,9 @@ const nextConfig = {
     }
     return config
   },
+  env: {
+    DISCORD_URL: process.env.DISCORD_URL
+  }
 }
 
 module.exports = nextConfig

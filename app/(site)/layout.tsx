@@ -19,7 +19,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={inter.className}>
         <Providers>
           <Header />
-          <div className="container flex flex-col mx-auto h-screen px-4 pt-4 lg:px-6 lg:pt-6">{children}</div>
+          <div className="container flex flex-col mx-auto h-screen px-4 pt-4 lg:px-6 lg:pt-6 lg:w-[990px]">
+            {children}
+          </div>
           <Footer />
         </Providers>
       </body>

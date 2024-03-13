@@ -10,12 +10,13 @@ type Props = {
 
 export default function NewsBadge(props: Props) {
   const { news } = props;
+  const date = new Date(news.publishedAt);
   return (
-    <Card className="py-4">
-      <CardBody className="flex flex-row overflow-visible py-2">
-        <div>
-          <p className="text-large uppercase font-bold">{news.title}</p>
-          <p>{news.content}</p>
+    <Card className="py-3">
+      <CardBody className="flex flex-row overflow-visible justify-between py-0">
+        <div className="flex flex-col">
+          <p className="italic pb-2">{date.toLocaleDateString('hu-HU')}</p>
+          <p className="sm:text-2xl uppercase font-bold">{news.title}</p>
         </div>
         <Image
           removeWrapper
