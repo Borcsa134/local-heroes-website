@@ -66,7 +66,7 @@ export default function Header() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/">A körről</Link>
+            <Link href="/about">A körről</Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
