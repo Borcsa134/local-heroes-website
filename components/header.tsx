@@ -6,18 +6,25 @@ import { Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMe
 import Image from 'next/image';
 import React from 'react';
 
+class menuItem {
+  constructor(
+    public name: string,
+    public link: string,
+    public isExternal: boolean
+  ) {}
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const discordUrl = process.env.DISCORD_URL;
-  const outsideLinkIcon = <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-4 pl-2" />;
   const menuItems = [
-    ['Kezdőlap', '/'],
-    ['Hírek', '/news'],
-    ['Események', '/'],
-    ['Szerepjáték', '/'],
-    ['Magic Est', '/'],
-    [['Discord ', outsideLinkIcon], `${discordUrl}`, true],
-    ['A körről', '/'],
+    new menuItem('Kezdőlap', '/', false),
+    new menuItem('Hírek', '/news', false),
+    new menuItem('Események', '/', false),
+    new menuItem('Szerepjáték', '/', false),
+    new menuItem('Magic Est', '/', false),
+    new menuItem('Discord', discordUrl as string, true),
+    new menuItem('A körről', '/', false),
   ];
   return (
     <div className="container mx-auto px-2 lg:px-4">
@@ -51,7 +58,7 @@ export default function Header() {
         </NavbarContent>
         <NavbarContent className="hidden sm:flex sm:leading-[4rem]" justify="end">
           <NavbarItem>
-            <Link href={process.env.DISCORD_URL}>
+            <Link href={discordUrl}>
               <p className="flex flex-row items-center">
                 Discord <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-4 pl-2" />
               </p>
@@ -63,9 +70,14 @@ export default function Header() {
         </NavbarContent>
         <NavbarMenu>
           {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${index}`}>
-              <Link className="w-full" href={item[1] as string} size="lg" target={item[2] ? '_blank' : '_self'}>
-                {item[0]}
+            <NavbarMenuItem key={index}>
+              <Link
+                className="w-full"
+                href={item.link as string}
+                size="lg"
+                target={item.isExternal ? '_blank' : '_self'}
+              >
+                {item.name}
               </Link>
             </NavbarMenuItem>
           ))}

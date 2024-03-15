@@ -13,7 +13,7 @@ export default function NewsBadge(props: Props) {
   const date = new Date(news.publishedAt);
   return (
     <Card className="py-3">
-      <CardBody className="flex flex-row overflow-visible justify-between py-0">
+      <CardBody className="flex flex-row overflow-visible justify-between py-0 min-h-[120px] max-h-[120px]">
         <div className="flex flex-col">
           <p className="italic pb-2">{date.toLocaleDateString('hu-HU')}</p>
           <p className="sm:text-2xl uppercase font-bold">{news.title}</p>
@@ -21,9 +21,8 @@ export default function NewsBadge(props: Props) {
         <Image
           removeWrapper
           alt="Card background"
-          className="z-0 object-cover rounded-xl"
+          className="z-0 object-contain rounded-xl w-[100px]"
           src={news.coverImage}
-          width={100}
         />
       </CardBody>
     </Card>
