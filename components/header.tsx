@@ -15,7 +15,7 @@ class menuItem {
 }
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = React.useReducer((current) => !current, false);
   const discordUrl = process.env.DISCORD_URL;
   const menuItems = [
     new menuItem('Kezdőlap', '/', false),
@@ -24,13 +24,14 @@ export default function Header() {
     new menuItem('Szerepjáték', '/', false),
     new menuItem('Magic Est', '/', false),
     new menuItem('Discord', discordUrl as string, true),
-    new menuItem('A körről', '/', false),
+    new menuItem('A körről', '/about', false),
   ];
   return (
     <div className="container mx-auto px-2 lg:px-4">
       <Navbar
         isBordered
         shouldHideOnScroll
+        isMenuOpen={isMenuOpen}
         onMenuOpenChange={setIsMenuOpen}
         classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
       >
@@ -76,6 +77,7 @@ export default function Header() {
                 href={item.link as string}
                 size="lg"
                 target={item.isExternal ? '_blank' : '_self'}
+                onPress={() => setIsMenuOpen()}
               >
                 {item.name}
               </Link>
