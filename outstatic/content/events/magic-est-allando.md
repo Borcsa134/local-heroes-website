@@ -4,7 +4,7 @@ status: 'published'
 author:
   name: 'Boris Makes Stuff'
   picture: 'https://avatars.githubusercontent.com/u/25614829?v=4'
-slug: 'magic-est'
+slug: 'magic-est-allando'
 description: ''
 coverImage: ''
 publishedAt: '2024-03-16T18:08:50.789Z'
