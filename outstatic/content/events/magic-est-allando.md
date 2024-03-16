@@ -7,6 +7,7 @@ author:
 slug: 'magic-est-allando'
 description: ''
 coverImage: ''
+discordChannel: '#magic-est'
 publishedAt: '2024-03-16T18:08:50.789Z'
 ---
 
