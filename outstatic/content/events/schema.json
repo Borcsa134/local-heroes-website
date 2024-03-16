@@ -1,0 +1,13 @@
+{
+  "title": "events",
+  "type": "object",
+  "properties": {
+    "discordChannel": {
+      "required": false,
+      "description": "The corresponding discord channel of the event",
+      "fieldType": "String",
+      "dataType": "string",
+      "title": "Discord Channel"
+    }
+  }
+}
