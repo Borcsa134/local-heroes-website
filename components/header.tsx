@@ -20,7 +20,7 @@ export default function Header() {
   const menuItems = [
     new menuItem('Kezdőlap', '/', false),
     new menuItem('Hírek', '/news', false),
-    new menuItem('Események', '/', false),
+    new menuItem('Események', '/events', false),
     new menuItem('Szerepjáték', '/', false),
     new menuItem('Magic Est', '/', false),
     new menuItem('Discord', discordUrl as string, true),
@@ -48,7 +48,7 @@ export default function Header() {
             <Link href="/news">Hírek</Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/">Események</Link>
+            <Link href="/events">Események</Link>
           </NavbarItem>
           <NavbarItem>
             <Link href="/">Szerepjáték</Link>

@@ -16,7 +16,7 @@ export default function NewsBadge(props: Props) {
       <CardBody className="flex flex-row overflow-visible justify-between py-0 min-h-[120px] max-h-[120px]">
         <div className="flex flex-col">
           <p className="italic pb-2">{date.toLocaleDateString('hu-HU')}</p>
-          <p className="sm:text-2xl uppercase font-bold">{news.title}</p>
+          <p className="text-xl md:text-2xl uppercase font-bold">{news.title}</p>
         </div>
         <Image
           removeWrapper
