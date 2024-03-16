@@ -10,4 +10,4 @@ coverImage: ''
 publishedAt: '2024-03-16T18:14:25.418Z'
 ---
 
-Időpont: minden kedden 
+Időpont: minden kedden 18:00-tól az SCH 120-as klubszobában
