@@ -1,6 +1,13 @@
 'use client';
-import { Link } from '@nextui-org/link';
-import { Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/navbar';
+import {
+  Link,
+  Navbar,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenu,
+  NavbarMenuItem,
+  NavbarMenuToggle,
+} from '@nextui-org/react';
 import Image from 'next/image';
 import React from 'react';
 
