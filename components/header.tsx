@@ -1,6 +1,4 @@
 'use client';
-import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from '@nextui-org/link';
 import { Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@nextui-org/navbar';
 import Image from 'next/image';
@@ -60,10 +58,8 @@ export default function Header() {
         </NavbarContent>
         <NavbarContent className="hidden sm:flex sm:leading-[4rem]" justify="end">
           <NavbarItem>
-            <Link href={discordUrl}>
-              <p className="flex flex-row items-center">
-                Discord <FontAwesomeIcon icon={faArrowUpRightFromSquare} className="h-4 pl-2" />
-              </p>
+            <Link href={discordUrl} showAnchorIcon isExternal>
+              <p className="flex flex-row items-center">Discord</p>
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -77,8 +73,11 @@ export default function Header() {
                 className="w-full"
                 href={item.link as string}
                 size="lg"
-                target={item.isExternal ? '_blank' : '_self'}
-                onPressEnd={() => setIsMenuOpen(false)}
+                isExternal={item.isExternal}
+                showAnchorIcon={item.isExternal}
+                onPressUp={() => {
+                  setIsMenuOpen(false);
+                }}
               >
                 {item.name}
               </Link>
