@@ -78,7 +78,7 @@ export default function Header() {
                 href={item.link as string}
                 size="lg"
                 target={item.isExternal ? '_blank' : '_self'}
-                onPress={() => setIsMenuOpen(false)}
+                onPressEnd={() => setIsMenuOpen(false)}
               >
                 {item.name}
               </Link>
