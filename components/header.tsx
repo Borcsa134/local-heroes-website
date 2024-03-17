@@ -85,7 +85,7 @@ export default function Header() {
                 size="lg"
                 isExternal={item.isExternal}
                 showAnchorIcon={item.isExternal}
-                onPress={() => toggleMenu()}
+                onClick={() => toggleMenu()}
               >
                 {item.name}
               </Link>
