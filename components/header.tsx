@@ -25,17 +25,20 @@ export default function Header() {
     new menuItem('A körről', '/about', false),
   ];
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <div className="container mx-auto px-2 lg:px-4">
       <Navbar
         isBordered
         shouldHideOnScroll
         isMenuOpen={isMenuOpen}
-        onMenuOpenChange={setIsMenuOpen}
         classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
       >
         <NavbarContent className="sm:hidden" justify="start">
-          <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} />
+          <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => toggleMenu()} />
         </NavbarContent>
         <NavbarContent className="hidden gap-4 sm:flex sm:leading-[4rem] " justify="center">
           <NavbarItem>
@@ -75,9 +78,7 @@ export default function Header() {
                 size="lg"
                 isExternal={item.isExternal}
                 showAnchorIcon={item.isExternal}
-                onPressUp={() => {
-                  setIsMenuOpen(false);
-                }}
+                onPress={() => toggleMenu()}
               >
                 {item.name}
               </Link>
