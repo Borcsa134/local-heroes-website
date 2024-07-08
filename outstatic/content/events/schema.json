@@ -8,6 +8,13 @@
       "fieldType": "String",
       "dataType": "string",
       "title": "Discord Channel"
+    },
+    "isPermanentEvent": {
+      "required": true,
+      "description": "Permanent events are sorted to the top of the page",
+      "fieldType": "Boolean",
+      "dataType": "boolean",
+      "title": "Is Permanent Event"
     }
   }
 }
