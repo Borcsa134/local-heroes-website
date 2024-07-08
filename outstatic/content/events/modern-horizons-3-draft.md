@@ -1,6 +1,6 @@
 ---
 title: 'Modern Horizons 3 Draft'
-status: 'draft'
+status: 'published'
 author:
   name: 'Boris Makes Stuff'
   picture: 'https://avatars.githubusercontent.com/u/25614829?v=4'
@@ -8,7 +8,7 @@ slug: 'modern-horizons-3-draft'
 description: ''
 coverImage: ''
 discordChannel: ''
-regularEvent: 'true'
+regularEvent: ''
 publishedAt: '2024-07-15T17:46:06.000Z'
 ---
 
