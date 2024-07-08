@@ -11,7 +11,7 @@
     },
     "isPermanentEvent": {
       "required": true,
-      "description": "Permanent events are sorted to the top of the page",
+      "description": "Yes",
       "fieldType": "Boolean",
       "dataType": "boolean",
       "title": "Is Permanent Event"
