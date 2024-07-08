@@ -8,7 +8,6 @@ slug: 'nyilt-szerepjatek-allando'
 description: ''
 coverImage: ''
 discordChannel: '#szerepjáték-nyílt'
-isPermanentEvent: 'true'
 regularEvent: 'true'
 publishedAt: '2024-03-16T18:14:25.418Z'
 ---

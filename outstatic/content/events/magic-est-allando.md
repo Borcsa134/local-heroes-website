@@ -8,7 +8,6 @@ slug: 'magic-est-allando'
 description: ''
 coverImage: ''
 discordChannel: '#magic-est'
-isPermanentEvent: 'true'
 regularEvent: 'true'
 publishedAt: '2024-03-16T18:08:50.789Z'
 ---
