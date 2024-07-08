@@ -10,7 +10,7 @@
       "title": "Discord Channel"
     },
     "regularEvent": {
-      "required": true,
+      "required": false,
       "description": "Yes, this happens every week!",
       "fieldType": "Boolean",
       "dataType": "boolean",
