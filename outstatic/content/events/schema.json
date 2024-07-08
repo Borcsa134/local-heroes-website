@@ -10,7 +10,7 @@
       "title": "Discord Channel"
     },
     "isPermanentEvent": {
-      "required": true,
+      "required": false,
       "description": "Yes, sort it to the top!",
       "fieldType": "Boolean",
       "dataType": "boolean",
