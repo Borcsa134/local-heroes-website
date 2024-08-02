@@ -15,6 +15,13 @@
       "fieldType": "Boolean",
       "dataType": "boolean",
       "title": "Regular Event"
+    },
+    "eventDate": {
+      "required": false,
+      "description": "Datetime (format: 2000-01-01T10:00)",
+      "fieldType": "String",
+      "dataType": "string",
+      "title": "Event Date"
     }
   }
 }
