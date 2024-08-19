@@ -50,5 +50,5 @@ promote:
 	git checkout production
 	git pull
 	git rebase main
-	git push
+	git push --force
 	git checkout main
