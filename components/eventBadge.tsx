@@ -30,7 +30,7 @@ export default function EventBadge(props: Props) {
       <CardBody className="flex flex-row overflow-visible justify-between p-0 min-h-[120px] max-h-[120px]">
         <div className="flex flex-col justify-between">
           <p className="text-xl md:text-2xl uppercase font-bold pb-2">{event.title}</p>
-          {(event.regularEvent as boolean) && (
+          {event.regularEvent == 'true' && (
             <div>
               <div dangerouslySetInnerHTML={{ __html: toNormalString(event.content) }}></div>
               {(event.discordChannel as string) && (
@@ -38,7 +38,7 @@ export default function EventBadge(props: Props) {
               )}
             </div>
           )}
-          {!(event.regularEvent as boolean) && (
+          {(event.regularEvent == 'false' || event.regularEvent == '') && (
             <div>
               {toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())
                 .toDate()
