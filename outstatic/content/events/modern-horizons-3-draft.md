@@ -15,4 +15,4 @@ publishedAt: '2024-07-15T17:46:06.000Z'
 
 Következő Magic: The gathering draft esemény időpontja **2024.07.15 19:00**. Az eseményen résztvevőket a szervező értesítette.
 
-Sok sikert minden versenyzőnek!
+Sok sikert kívánunk minden versenyzőnek!
