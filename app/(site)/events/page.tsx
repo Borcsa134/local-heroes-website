@@ -1,6 +1,7 @@
 import { OstDocument } from 'outstatic';
 import { getDocuments } from 'outstatic/server';
 
+import CalendarBadge from '@/components/calendarBadge';
 import EventBadge from '@/components/eventBadge';
 
 type Events = OstDocument<{
@@ -16,6 +17,7 @@ async function getData() {
     'publishedAt',
     'discordChannel',
     'regularEvent',
+    'eventDate',
   ]);
 
   return events;
@@ -26,7 +28,7 @@ async function getRegularEvents(events: Events[]) {
 }
 
 async function getOtherEvents(events: Events[]) {
-  return events.filter((event) => event.regularEvent === '');
+  return events.filter((event) => event.regularEvent === '' || event.regularEvent === 'false');
 }
 
 export default async function Events() {
@@ -43,11 +45,7 @@ export default async function Events() {
         ))}
       </div>
       <h1 className="text-4xl text-center py-4">Közelgő események</h1>
-      <div className="flex flex-col md:flex-row justify-center">
-        {otherEvents.map((event) => (
-          <EventBadge key={event.slug} event={event} />
-        ))}
-      </div>
+      <CalendarBadge events={otherEvents} />
     </div>
   );
 }
