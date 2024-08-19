@@ -56,6 +56,6 @@ export default async function Events(params: Params) {
 }
 
 export async function generateStaticParams() {
-  const event = getDocumentSlugs('news');
+  const event = getDocumentSlugs('events');
   return event.map((slug) => ({ slug }));
 }
