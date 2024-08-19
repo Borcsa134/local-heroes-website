@@ -14,7 +14,7 @@ function toNormalString(mdString: string) {
   return marked.parse(mdString.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, ''));
 }
 
-const defaultClassNames = 'py-3 mb-4';
+const defaultClassNames = 'p-3 mb-4 md:odd:mr-2 md:even:ml-2';
 const eventClassNames = defaultClassNames;
 
 export default function EventBadge(props: Props) {
@@ -27,7 +27,7 @@ export default function EventBadge(props: Props) {
         backgroundSize: 'cover',
       }}
     >
-      <CardBody className="flex flex-row overflow-visible justify-between py-0 min-h-[120px] max-h-[120px]">
+      <CardBody className="flex flex-row overflow-visible justify-between p-0 min-h-[120px] max-h-[120px]">
         <div className="flex flex-col justify-between">
           <p className="text-xl md:text-2xl uppercase font-bold pb-2">{event.title}</p>
           {(event.regularEvent as boolean) && (
