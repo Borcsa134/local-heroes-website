@@ -23,7 +23,7 @@ export default function EventBadge(props: Props) {
     <Card
       className={(event.regularEvent as boolean) ? defaultClassNames : eventClassNames}
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.85) 20%, rgba(255,255,255,0) 100%), url(${event.coverImage})`,
+        backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
         backgroundSize: 'cover',
       }}
     >

@@ -8,8 +8,9 @@ import {
   NavbarMenuItem,
   NavbarMenuToggle,
 } from '@nextui-org/react';
-import Image from 'next/image';
 import React from 'react';
+import lhLogo from '../../public/lh-logo.svg';
+import { ThemeSwitcher } from './themeSwitcher';
 
 class menuItem {
   constructor(
@@ -42,15 +43,17 @@ export default function Header() {
         isBordered
         shouldHideOnScroll
         isMenuOpen={isMenuOpen}
-        classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
+        classNames={{ wrapper: 'w-[990px] justify-between px-0'}}
       >
-        <NavbarContent className="sm:hidden" justify="start">
+        <NavbarContent className="sm:hidden">
           <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => toggleMenu()} />
         </NavbarContent>
         <NavbarContent className="hidden gap-4 sm:flex sm:leading-[4rem] " justify="center">
           <NavbarItem>
             <Link href="/">
-              <Image src="/lh-logo-white.png" width={64} height={64} alt="lh-logo" />
+              <svg width={55} height={55}>
+                <use href={`${lhLogo}#logo`} fill="gray" />
+              </svg>
             </Link>
           </NavbarItem>
           <NavbarItem>
@@ -67,6 +70,9 @@ export default function Header() {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent className="hidden sm:flex sm:leading-[4rem]" justify="end">
+          <NavbarItem>
+            <ThemeSwitcher />
+          </NavbarItem>
           <NavbarItem>
             <Link href={discordUrl} showAnchorIcon isExternal>
               <p className="flex flex-row items-center">Discord</p>

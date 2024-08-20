@@ -40,7 +40,7 @@ export default async function Events(params: Params) {
       <div
         className="flex flex-col w-100 min-h-60 max-h-60"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(0,0,0,1) 20%, rgba(255,255,255,0) 100%), url(${event.coverImage})`,
+          backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
           backgroundSize: 'cover',
           borderRadius: '6px',
         }}
