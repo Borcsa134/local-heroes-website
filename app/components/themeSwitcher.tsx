@@ -7,10 +7,17 @@ import { useTheme } from 'next-themes';
 import React, { useEffect } from 'react';
 
 export function ThemeSwitcher() {
+  const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
-  const [isSelected, setIsSelected] = React.useState(loadTheme());
+  const [isSelected, setIsSelected] = React.useState(true);
 
   useEffect(() => {
+    setMounted(true);
+    setIsSelected(loadTheme());
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
     setUserTheme(isSelected ? 'dark' : 'light');
   });
 
