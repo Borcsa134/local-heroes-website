@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import DiscordWidget from '@/components/discordWidget';
+import DiscordWidget from '@/app/components/discordWidget';
 export default function Home() {
   return (
     <div>

@@ -1,8 +1,8 @@
 import { OstDocument } from 'outstatic';
 import { getDocuments } from 'outstatic/server';
 
-import CalendarBadge from '@/components/calendarBadge';
-import EventBadge from '@/components/eventBadge';
+import CalendarBadge from '@/app/components/calendarBadge';
+import EventBadge from '@/app/components/eventBadge';
 
 type Events = OstDocument<{
   [key: string]: unknown;

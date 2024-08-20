@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { getDocuments } from 'outstatic/server';
 
-import NewsBadge from '@/components/newsBadge';
+import NewsBadge from '@/app/components/newsBadge';
 
 export default async function News() {
   const newsList = await getData();
