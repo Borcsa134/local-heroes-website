@@ -12,7 +12,7 @@ export function ThemeSwitcher() {
 
   useEffect(() => {
     setUserTheme(isSelected ? 'dark' : 'light');
-  }, [isSelected]);
+  });
 
   function loadTheme() {
     const theme = localStorage.getItem('theme');
@@ -20,14 +20,9 @@ export function ThemeSwitcher() {
   }
 
   function setUserTheme(newTheme: string) {
-    const theme = localStorage.getItem('theme');
-    if (theme && theme != newTheme) {
-      setTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
-    } else {
-      setTheme('dark');
-      localStorage.setItem('theme', 'dark');
-    }
+    if (newTheme == theme) return;
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
   }
 
   return (

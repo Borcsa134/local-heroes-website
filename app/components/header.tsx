@@ -9,6 +9,7 @@ import {
   NavbarMenuToggle,
 } from '@nextui-org/react';
 import React from 'react';
+
 import lhLogo from '../../public/lh-logo.svg';
 import { ThemeSwitcher } from './themeSwitcher';
 
@@ -43,7 +44,7 @@ export default function Header() {
         isBordered
         shouldHideOnScroll
         isMenuOpen={isMenuOpen}
-        classNames={{ wrapper: 'w-[990px] justify-between px-0'}}
+        classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
       >
         <NavbarContent className="sm:hidden">
           <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => toggleMenu()} />
