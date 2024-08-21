@@ -7,6 +7,7 @@
   "rules": {
     "prettier/prettier": "warn",
     "react/jsx-uses-react": "error",
+    "react/jsx-key": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unsafe-argument": "error",
     "unused-imports/no-unused-imports": "error",
@@ -16,16 +17,16 @@
         "vars": "all",
         "varsIgnorePattern": "^_",
         "args": "after-used",
-        "argsIgnorePattern": "^_"
-      }
+        "argsIgnorePattern": "^_",
+      },
     ],
     "sort-imports": [
       "error",
       {
         "ignoreCase": true,
         "ignoreDeclarationSort": true,
-        "ignoreMemberSort": false
-      }
+        "ignoreMemberSort": false,
+      },
     ],
     "import/order": [
       "error",
@@ -35,11 +36,11 @@
           {
             "pattern": "react",
             "group": "external",
-            "position": "before"
-          }
+            "position": "before",
+          },
         ],
-        "newlines-between": "always"
-      }
-    ]
-  }
+        "newlines-between": "always",
+      },
+    ],
+  },
 }

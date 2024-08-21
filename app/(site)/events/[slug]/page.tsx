@@ -2,6 +2,8 @@ import { marked } from 'marked';
 import { notFound } from 'next/navigation';
 import { getDocumentBySlug, getDocumentSlugs } from 'outstatic/server';
 
+import Breadrumb from '@/app/components/breadCrumb';
+
 interface Params {
   params: {
     slug: string;
@@ -37,15 +39,16 @@ export default async function Events(params: Params) {
   const date = new Date(event.publishedAt);
   return (
     <div>
+      <Breadrumb />
       <div
-        className="flex flex-col w-100 min-h-60 max-h-60"
+        className="flex flex-col w-100 min-h-60 max-h-60 p-4"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
           backgroundSize: 'cover',
           borderRadius: '6px',
         }}
       >
-        <h1 className="text-left text-3xl sm:text-4xl py-4">{event.title}</h1>
+        <h1 className="text-left text-3xl sm:text-4xl pb-4">{event.title}</h1>
         <p className="text-left italic text-sm">
           {event.author!.name} - {date.toLocaleDateString('hu-HU')}
         </p>

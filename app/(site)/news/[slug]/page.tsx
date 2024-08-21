@@ -2,6 +2,8 @@ import { marked } from 'marked';
 import { notFound } from 'next/navigation';
 import { getDocumentBySlug, getDocumentSlugs } from 'outstatic/server';
 
+import Breadcrumb from '@/app/components/breadCrumb';
+
 interface Params {
   params: {
     slug: string;
@@ -35,6 +37,7 @@ export default async function News(params: Params) {
   const date = new Date(news.publishedAt);
   return (
     <div>
+      <Breadcrumb />
       <h1 className="text-4xl text-center py-4">{news.title}</h1>
       <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>
       <div dangerouslySetInnerHTML={{ __html: news.content }} className="pt-4" />
