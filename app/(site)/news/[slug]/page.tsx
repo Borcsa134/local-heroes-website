@@ -40,7 +40,7 @@ async function getData({ params }: Props) {
     notFound();
   }
 
-  const content = await marked.parse(post.content || '');
+  const content = (await marked.parse(post.content || '')).replaceAll('\<a', '\<a target="_blank"');
 
   return {
     ...post,
@@ -56,7 +56,7 @@ export default async function News(params: Props) {
       <Breadcrumb />
       <h1 className="text-4xl text-center py-4">{news.title}</h1>
       <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>
-      <div dangerouslySetInnerHTML={{ __html: news.content }} className="pt-4" />
+      <div dangerouslySetInnerHTML={{ __html: news.content }} className="pt-4 marked" />
     </div>
   );
 }
