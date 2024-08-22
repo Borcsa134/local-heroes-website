@@ -5,6 +5,7 @@ import { DateValue, ScrollShadow } from '@nextui-org/react';
 import Link from 'next/link';
 import { OstDocument } from 'outstatic';
 import React from 'react';
+import { I18nProvider } from '@react-aria/i18n';
 
 import EventBadge from './eventBadge';
 
@@ -36,17 +37,19 @@ export default function CalendarBadge(props: Props) {
   };
 
   return (
-    <div className="flex sm:flex-row max-h-[300px] justify-between px-3">
-      <Calendar
-        value={currentDate}
-        onChange={setCurrentDate}
-        isDateUnavailable={isDateUnavailable}
-        calendarWidth={256}
-        classNames={{
-          base: 'hidden sm:block',
-          cellButton: '!no-underline',
-        }}
-      ></Calendar>
+    <div className="mb-4 flex sm:flex-row max-h-[300px] justify-between">
+      <I18nProvider locale="hu-HU">
+        <Calendar
+          value={currentDate}
+          onChange={setCurrentDate}
+          isDateUnavailable={isDateUnavailable}
+          calendarWidth={256}
+          classNames={{
+            base: 'hidden sm:block',
+            cellButton: '!no-underline',
+          }}
+        ></Calendar>
+      </I18nProvider>
       <ScrollShadow className="grow sm:ml-4">
         {upcomingEvents.map((event) => (
           <Link key={event.slug} href={'/events/' + event.slug}>

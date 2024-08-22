@@ -39,7 +39,7 @@ export default async function Events() {
   return (
     <div className="lg:w-[990px]">
       <h1 className="text-4xl text-center py-4">Állandó események</h1>
-      <div className="flex flex-col md:flex-row justify-around">
+      <div className="mb-4 flex flex-col md:flex-row justify-around">
         {regularEvents.map((event) => (
           <EventBadge key={event.slug} event={event} />
         ))}

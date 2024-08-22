@@ -1,7 +1,7 @@
 import { Image } from '@nextui-org/image';
 export default function About() {
   return (
-    <div className="lg:w-[990px]">
+    <div>
       <h1 className="text-4xl text-center py-4">A körről</h1>
       <div className="flex flex-row">
         <p className="pt-4 text-justify">

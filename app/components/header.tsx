@@ -39,13 +39,8 @@ export default function Header() {
   };
 
   return (
-    <div className="container mx-auto px-2 lg:px-4">
-      <Navbar
-        isBordered
-        shouldHideOnScroll
-        isMenuOpen={isMenuOpen}
-        classNames={{ wrapper: 'w-[990px] justify-between px-0' }}
-      >
+    <div className="container mx-auto px-4 lg:w-[990px]">
+      <Navbar isBordered shouldHideOnScroll isMenuOpen={isMenuOpen} classNames={{ wrapper: 'justify-between px-0' }}>
         <NavbarContent className="sm:hidden">
           <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => toggleMenu()} />
         </NavbarContent>
@@ -58,16 +53,24 @@ export default function Header() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/news">Hírek</Link>
+            <Link href="/news" className="text-sm md:text-base">
+              Hírek
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/events">Események</Link>
+            <Link href="/events" className="text-sm md:text-base">
+              Események
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/">Szerepjáték</Link>
+            <Link href="/" className="text-sm md:text-base">
+              Szerepjáték
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/">Magic Est</Link>
+            <Link href="/" className="text-sm md:text-base">
+              Magic Est
+            </Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent className="hidden sm:flex sm:leading-[4rem]" justify="end">
@@ -75,12 +78,14 @@ export default function Header() {
             <ThemeSwitcher />
           </NavbarItem>
           <NavbarItem>
-            <Link href={discordUrl} showAnchorIcon isExternal>
+            <Link href={discordUrl} showAnchorIcon isExternal className="text-sm md:text-base">
               <p className="flex flex-row items-center">Discord</p>
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/about">A körről</Link>
+            <Link href="/about" className="text-sm md:text-base">
+              A körről
+            </Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>

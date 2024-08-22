@@ -14,14 +14,14 @@ function toNormalString(mdString: string) {
   return marked.parse(mdString.replace(/^[\u200B\u200C\u200D\u200E\u200F\uFEFF]/, ''));
 }
 
-const defaultClassNames = 'p-3 mb-4 md:odd:mr-2 md:even:ml-2';
-const eventClassNames = defaultClassNames;
+const defaultClassNames = 'p-4 mb-4';
+const regularClassNames = 'p-4 md:first:mr-2 md:[&:nth-child(n+2):nth-last-child(n+2)]:mx-2 md:last:ml-2';
 
 export default function EventBadge(props: Props) {
   const { event } = props;
   return (
     <Card
-      className={(event.regularEvent as boolean) ? defaultClassNames : eventClassNames}
+      className={event.regularEvent == 'true' ? regularClassNames : defaultClassNames}
       style={{
         backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
         backgroundSize: 'cover',
