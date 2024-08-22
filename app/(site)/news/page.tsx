@@ -1,7 +1,29 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
 import { getDocuments } from 'outstatic/server';
 
 import NewsBadge from '@/app/components/newsBadge';
+import convertToOpenGraph from '@/app/utils/metadata';
+
+interface Props {}
+
+export async function generateMetadata(params: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const openGraph = convertToOpenGraph((await parent).openGraph);
+
+  return {
+    title: 'Hírek',
+    openGraph: {
+      ...openGraph,
+      title: 'Hírek',
+    },
+  };
+}
+
+async function getData() {
+  const news = getDocuments('news', ['title', 'slug', 'coverImage', 'publishedAt']);
+
+  return news;
+}
 
 export default async function News() {
   const newsList = await getData();
@@ -19,10 +41,4 @@ export default async function News() {
       </ul>
     </div>
   );
-}
-
-async function getData() {
-  const news = getDocuments('news', ['title', 'slug', 'coverImage', 'publishedAt']);
-
-  return news;
 }

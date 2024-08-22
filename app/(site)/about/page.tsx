@@ -1,8 +1,26 @@
 import { Image } from '@nextui-org/image';
+import { Metadata, ResolvingMetadata } from 'next';
+
+import convertToOpenGraph from '@/app/utils/metadata';
+
+interface Props {}
+
+export async function generateMetadata(params: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const openGraph = convertToOpenGraph((await parent).openGraph);
+
+  return {
+    title: 'Rólunk',
+    openGraph: {
+      ...openGraph,
+      title: 'Rólunk',
+    },
+  };
+}
+
 export default function About() {
   return (
     <div>
-      <h1 className="text-4xl text-center py-4">A körről</h1>
+      <h1 className="text-4xl text-center py-4">A körről pár szóban</h1>
       <div className="flex flex-row">
         <p className="pt-4 text-justify">
           A kör 1994-ben alapult a Budapesti Műszaki és Gazdaságtudományi Egyetem Villamosmérnöki karán. A kezdetekben

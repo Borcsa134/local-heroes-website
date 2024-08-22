@@ -1,12 +1,28 @@
+import { Metadata, ResolvingMetadata } from 'next';
 import { OstDocument } from 'outstatic';
 import { getDocuments } from 'outstatic/server';
 
 import CalendarBadge from '@/app/components/calendarBadge';
 import EventBadge from '@/app/components/eventBadge';
+import convertToOpenGraph from '@/app/utils/metadata';
 
 type Events = OstDocument<{
   [key: string]: unknown;
 }>;
+
+interface Props {}
+
+export async function generateMetadata(params: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const openGraph = convertToOpenGraph((await parent).openGraph);
+
+  return {
+    title: 'Események',
+    openGraph: {
+      ...openGraph,
+      title: 'Események',
+    },
+  };
+}
 
 async function getData() {
   const events = getDocuments('events', [
