@@ -2,10 +2,10 @@
 import { CalendarDate, getLocalTimeZone, parseDateTime, toCalendarDate, today, toZoned } from '@internationalized/date';
 import { Calendar } from '@nextui-org/calendar';
 import { DateValue, ScrollShadow } from '@nextui-org/react';
+import { I18nProvider } from '@react-aria/i18n';
 import Link from 'next/link';
 import { OstDocument } from 'outstatic';
 import React from 'react';
-import { I18nProvider } from '@react-aria/i18n';
 
 import EventBadge from './eventBadge';
 
@@ -18,9 +18,11 @@ interface Props {
 }
 
 function getUpcomingEvents(events: Events[], currentDate: CalendarDate) {
-  return events.filter(
-    (event) => toCalendarDate(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) >= currentDate
-  );
+  return events
+    .filter(
+      (event) => toCalendarDate(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) >= currentDate
+    )
+    .sort((a, b) => parseDateTime(a.eventDate as string).compare(parseDateTime(b.eventDate as string)));
 }
 
 export default function CalendarBadge(props: Props) {
@@ -30,7 +32,7 @@ export default function CalendarBadge(props: Props) {
 
   const isDateUnavailable = (date: DateValue) => {
     return (
-      props.events.some(
+      props.events.every(
         (event) => date.compare(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) != 0
       ) && date.compare(dateToday) != 0
     );
