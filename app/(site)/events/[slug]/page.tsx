@@ -12,8 +12,8 @@ interface Props {
   };
 }
 
-export async function generateMetadata(params: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const event = await getData(params);
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const event = await getData(props);
 
   const openGraph = convertToOpenGraph((await parent).openGraph);
 
@@ -50,8 +50,8 @@ async function getData({ params }: Props) {
   };
 }
 
-export default async function Events(params: Props) {
-  const event = await getData(params);
+export default async function Events(props: Props) {
+  const event = await getData(props);
   const date = new Date(event.publishedAt);
   return (
     <div>
