@@ -28,8 +28,8 @@ export default function Header() {
     new menuItem('Kezdőlap', '/', false),
     new menuItem('Hírek', '/news', false),
     new menuItem('Események', '/events', false),
-    new menuItem('Szerepjáték', '/', false),
-    new menuItem('Magic Est', '/', false),
+    new menuItem('Szerepjáték', '/rpg', false),
+    new menuItem('Magic Est', '/mtg', false),
     new menuItem('Discord', discordUrl as string, true),
     new menuItem('A körről', '/about', false),
   ];
@@ -63,12 +63,12 @@ export default function Header() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/" className="text-sm md:text-base">
+            <Link href="/rpg" className="text-sm md:text-base">
               Szerepjáték
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/" className="text-sm md:text-base">
+            <Link href="/mtg" className="text-sm md:text-base">
               Magic Est
             </Link>
           </NavbarItem>
