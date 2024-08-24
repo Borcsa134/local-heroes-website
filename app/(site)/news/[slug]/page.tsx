@@ -40,7 +40,7 @@ async function getData({ params }: Props) {
     notFound();
   }
 
-  const content = (await marked.parse(post.content || '')).replaceAll('\<a', '\<a target="_blank"');
+  const content = (await marked.parse(post.content || '')).replaceAll('<a', '<a target="_blank"');
 
   return {
     ...post,
