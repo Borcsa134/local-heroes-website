@@ -69,7 +69,7 @@ export default async function Events(params: Props) {
           {event.author!.name} - {date.toLocaleDateString('hu-HU')}
         </p>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: event.content }} className="pt-4" />
+      <div dangerouslySetInnerHTML={{ __html: event.content }} className="pt-4 marked" />
     </div>
   );
 }
