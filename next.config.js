@@ -16,6 +16,15 @@ const nextConfig = {
   env: {
     DISCORD_URL: process.env.DISCORD_URL,
   },
+  redirects: () => {
+    return [
+      {
+        source: '/admin',
+        destination: '/outstatic',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
