@@ -1,3 +1,21 @@
+import { ResolvingMetadata } from 'next';
+
+import convertToOpenGraph from '@/app/utils/metadata';
+
+interface Props {}
+
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+  const openGraph = convertToOpenGraph((await parent).openGraph);
+
+  return {
+    title: 'Szerepjáték',
+    openGraph: {
+      ...openGraph,
+      title: 'Szerepjáték',
+    },
+  };
+}
+
 export default function RolePlayingGames() {
   return (
     <div className="lg:w-[990px]">
