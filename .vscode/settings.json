@@ -6,5 +6,6 @@
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
   },
-  "prettier.resolveGlobalModules": true
+  "prettier.resolveGlobalModules": true,
+  "prettier.configPath": ".prettierrc"
 }

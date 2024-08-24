@@ -17,7 +17,7 @@ class menuItem {
   constructor(
     public name: string,
     public link: string,
-    public isExternal: boolean
+    public isExternal: boolean,
   ) {}
 }
 

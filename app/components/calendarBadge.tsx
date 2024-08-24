@@ -20,7 +20,7 @@ interface Props {
 function getUpcomingEvents(events: Events[], currentDate: CalendarDate) {
   return events
     .filter(
-      (event) => toCalendarDate(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) >= currentDate
+      (event) => toCalendarDate(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) >= currentDate,
     )
     .sort((a, b) => parseDateTime(a.eventDate as string).compare(parseDateTime(b.eventDate as string)));
 }
@@ -33,7 +33,7 @@ export default function CalendarBadge(props: Props) {
   const isDateUnavailable = (date: DateValue) => {
     return (
       props.events.every(
-        (event) => date.compare(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) != 0
+        (event) => date.compare(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) != 0,
       ) && date.compare(dateToday) != 0
     );
   };

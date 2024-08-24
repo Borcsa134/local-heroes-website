@@ -1,4 +1,4 @@
-import { ResolvingMetadata } from 'next';
+import { Metadata, ResolvingMetadata } from 'next';
 
 import convertToOpenGraph from '@/app/utils/metadata';
 
