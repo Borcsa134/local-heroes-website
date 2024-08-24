@@ -1,4 +1,4 @@
-FROM node:20-alpine3.19
+FROM arm64v8/node:20-alpine3.19
 
 RUN apk update && apk upgrade
 RUN apk add chromium vim git 
