@@ -4,33 +4,36 @@ import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Switch } from '@nextui-org/react';
 import { useTheme } from 'next-themes';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export function ThemeSwitcher() {
-  const [mounted, setMounted] = React.useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isSelected, setIsSelected] = useState(true);
   const { theme, setTheme } = useTheme();
-  const [isSelected, setIsSelected] = React.useState(true);
 
   useEffect(() => {
-    setMounted(true);
-    setIsSelected(loadTheme());
+    setIsMounted(true);
+    const handleStorageChange = () => {
+      const storedTheme = localStorage.getItem('theme');
+      setIsSelected(storedTheme === 'light' ? false : true);
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   useEffect(() => {
-    if (!mounted) return;
-    setUserTheme(isSelected ? 'dark' : 'light');
-  });
+    const newTheme = isSelected ? 'dark' : 'light';
+    if (newTheme !== theme) {
+      setTheme(newTheme);
+      localStorage.setItem('theme', newTheme);
+    }
+  }, [isSelected, setTheme, theme]);
 
-  function loadTheme() {
-    const theme = localStorage.getItem('theme');
-    return theme === 'light' ? false : true;
-  }
-
-  function setUserTheme(newTheme: string) {
-    if (newTheme == theme) return;
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-  }
+  if (!isMounted) return null;
 
   return (
     <div>
@@ -39,7 +42,7 @@ export function ThemeSwitcher() {
         onValueChange={setIsSelected}
         startContent={<FontAwesomeIcon icon={faMoon} />}
         endContent={<FontAwesomeIcon icon={faSun} />}
-      ></Switch>
+      />
     </div>
   );
 }
