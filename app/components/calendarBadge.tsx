@@ -39,13 +39,15 @@ export default function CalendarBadge(props: Props) {
   };
 
   return (
-    <div className="mb-4 flex sm:flex-row max-h-[300px] justify-between">
+    <div className="mb-4 flex sm:flex-row max-h-[315px] justify-between">
       <I18nProvider locale="hu-HU">
         <Calendar
           value={currentDate}
           onChange={setCurrentDate}
           isDateUnavailable={isDateUnavailable}
-          calendarWidth={256}
+          calendarWidth={275}
+          hideDisabledDates
+          showMonthAndYearPickers
           classNames={{
             base: 'hidden sm:block',
             cellButton: '!no-underline',
