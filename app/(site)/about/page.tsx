@@ -23,7 +23,7 @@ export default function About() {
       <h1 className="text-4xl text-center py-4">A körről pár szóban</h1>
       <div className="flex flex-row">
         <p className="pt-4 text-justify">
-          A kör 1994-ben alapult a Budapesti Műszaki és Gazdaságtudományi Egyetem Villamosmérnöki karán. A kezdetekben
+          A kör 1994-ben alakult a Budapesti Műszaki és Gazdaságtudományi Egyetem Villamosmérnöki karán. A kezdetekben
           néhány fővel rendelkező kör csak szerepjátékokkal foglalkozott, de mára már sokkal többet nyújt. A hét
           különböző napjain különféle programokra lehet csatlakozni, mint például a nyílt szerepjáték estek, Magic: The
           Gathering kártya estek (Magic Est). Az elmúlt évtizedben a kör létszáma jelentősen megnövekedett, közel 30
