@@ -12,7 +12,7 @@ services:
       - 3000:3000
     networks:
       - lh-network
-    command: npm run dev
+    command: npx turbo dev
 networks:
   lh-network:
     external: true
