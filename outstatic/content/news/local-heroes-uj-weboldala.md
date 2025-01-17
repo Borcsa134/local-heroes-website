@@ -14,4 +14,4 @@ publishedAt: '2024-03-10T18:52:57.564Z'
 
 Az oldal folyamatos fejlesztés alatt áll és hétről-hétre bővül különféle tartalommal. 
 
-További tartalomért keresd fel a Discord szerverünket.
+További tartalmakért keresd fel a Discord szerverünket.
