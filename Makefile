@@ -18,6 +18,9 @@ start:
 stop:
 	docker compose down
 
+install:
+	docker compose run --rm $(container) npm install
+
 # restart containers
 restart: stop start
 
@@ -52,3 +55,9 @@ promote:
 	git rebase main
 	git push --force
 	git checkout main
+
+rebase:
+	git checkout main
+	git pull
+	git rebase production
+	git push
