@@ -1,5 +1,5 @@
 import { getLocalTimeZone, parseDateTime, toZoned } from '@internationalized/date';
-import { Card, CardBody } from '@nextui-org/card';
+import { Card, CardBody } from '@heroui/card';
 import { marked } from 'marked';
 import { OstDocument } from 'outstatic';
 

@@ -1,4 +1,4 @@
-import { Image } from '@nextui-org/image';
+import { Image } from '@heroui/image';
 import { Metadata, ResolvingMetadata } from 'next';
 
 import convertToOpenGraph from '@/app/utils/metadata';

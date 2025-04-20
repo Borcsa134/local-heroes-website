@@ -18,7 +18,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@internationalized/date": "^3.5.5",
-    "@nextui-org/react": "^2.4.6",
+    "@heroui/react": "2.7.6",
     "@types/node": "^20.16.1",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",

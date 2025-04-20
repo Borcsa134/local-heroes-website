@@ -1,13 +1,5 @@
 'use client';
-import {
-  Link,
-  Navbar,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenu,
-  NavbarMenuItem,
-  NavbarMenuToggle,
-} from '@nextui-org/react';
+import { Link, Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react';
 import React from 'react';
 
 import lhLogo from '../../public/lh-logo.svg';

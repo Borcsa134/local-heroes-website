@@ -2,7 +2,7 @@
 
 import { faMoon, faSun } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Switch } from '@nextui-org/react';
+import { Switch } from '@heroui/react';
 import { useTheme } from 'next-themes';
 import { useEffect, useRef, useState } from 'react';
 
@@ -40,7 +40,7 @@ export function ThemeSwitcher() {
     }
   }, [isSelected, setTheme, isMounted]);
 
-  if (!isMounted) return null;
+  // if (!isMounted) return null;
 
   return (
     <div>

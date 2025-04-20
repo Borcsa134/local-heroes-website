@@ -1,7 +1,7 @@
 'use client';
 import { CalendarDate, getLocalTimeZone, parseDateTime, toCalendarDate, today, toZoned } from '@internationalized/date';
-import { Calendar } from '@nextui-org/calendar';
-import { DateValue, ScrollShadow } from '@nextui-org/react';
+import { Calendar } from '@heroui/calendar';
+import { DateValue, ScrollShadow } from '@heroui/react';
 import { I18nProvider } from '@react-aria/i18n';
 import Link from 'next/link';
 import { OstDocument } from 'outstatic';
