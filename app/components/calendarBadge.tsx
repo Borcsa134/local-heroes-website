@@ -42,7 +42,7 @@ export default function CalendarBadge(props: Props) {
     <div className="mb-4 flex sm:flex-row max-h-[315px] justify-between">
       <I18nProvider locale="hu-HU">
         <Calendar
-          value={currentDate}
+          // value={currentDate}
           onChange={setCurrentDate}
           isDateUnavailable={isDateUnavailable}
           calendarWidth={275}
