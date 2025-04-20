@@ -6,6 +6,7 @@ import React from 'react';
 
 import Footer from '@/app/components/footer';
 import Header from '@/app/components/header';
+import { auth } from '@/auth';
 
 import { Providers } from './providers';
 
@@ -37,12 +38,14 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
+
   return (
-    <html lang="en" className="dark text-foreground bg-background">
+    <html lang="en" className="text-foreground bg-background dark" style={{ colorScheme: 'dark' }}>
       <body className={inter.className}>
         <Providers>
-          <Header />
+          <Header session={session} />
           <div className="container flex flex-col mx-auto min-h-screen px-4 pt-4 lg:w-[990px]">{children}</div>
           <Footer />
         </Providers>

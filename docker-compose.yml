@@ -1,18 +1,32 @@
 services:
   lh-frontend:
     build: ./
-    image: base
+    image: lh-base
     working_dir: /usr/src/app/
     environment:
       - 'NEXT_WEBPACK_USEPOLLING=1'
     volumes:
       - ./:/usr/src/app/
-      - /usr/src/app/node_modules/
     ports:
       - 3000:3000
     networks:
       - lh-network
-    command: npx turbo dev
+    command: npm run dev
+  postgres:
+    image: postgres:15-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data_lh:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=lhdb
+    networks:
+      - lh-network
+volumes:
+  postgres_data_lh:
+
 networks:
   lh-network:
-    external: true

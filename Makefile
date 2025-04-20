@@ -1,4 +1,4 @@
-.PHONY: start stop build sh logs test restart config lint 
+.PHONY: start start-db stop build install sh logs test restart config lint db 
 
 # \
 !ifndef 0 # \
@@ -14,12 +14,13 @@ container=lh-frontend
 start:
 	docker compose up -d
 
+# start the db only
+start-db:
+	docker compose up -d postgres
+
 # stop all the containers
 stop:
 	docker compose down
-
-install:
-	docker compose run --rm $(container) npm install
 
 # restart containers
 restart: stop start
@@ -28,16 +29,29 @@ restart: stop start
 build:
 	docker compose build
 
+# install npm packages
+install:
+	docker compose run --rm $(container) npm install
+
 # get a shell within the app container
 sh:
 	docker compose exec $(container) /bin/sh
 
 # run tests
 test:
-	docker compose exec $(container) /bin/sh -c "npm run test"
+	docker compose exec $(container) npm run test
 
+# run linter
 lint:
-	docker compose exec $(container) /bin/sh -c "npm run lint"
+	docker compose exec $(container) npm run lint
+
+# connect to db
+db:
+	docker compose exec postgres psql -h postgres -p 5432 -U pguser -d lhdb
+
+# migrate db
+migrate:
+	docker compose exec $(container) npx prisma migrate dev
 
 # check console output
 logs:
@@ -51,13 +65,6 @@ promote:
 	echo "Make sure master/production branch is up-to-date! And what you are about to deploy is already on staging! Hit [ENTER] to continue"
 	$(wait_for_input)
 	git checkout production
-	git pull
 	git rebase main
-	git push --force
-	git checkout main
-
-rebase:
-	git checkout main
-	git pull
-	git rebase production
 	git push
+	git checkout main

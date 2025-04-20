@@ -1,5 +1,7 @@
 'use client';
 import { Link, Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react';
+import { Session } from 'next-auth';
+import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
 
 import lhLogo from '../../public/lh-logo.svg';
@@ -13,16 +15,18 @@ class menuItem {
   ) {}
 }
 
-export default function Header() {
+interface Props {
+  session: Session | null;
+}
+
+export default function Header({ session }: Props) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const discordUrl = process.env.DISCORD_URL;
   const menuItems = [
     new menuItem('Kezdőlap', '/', false),
     new menuItem('Hírek', '/news', false),
     new menuItem('Események', '/events', false),
     new menuItem('Szerepjáték', '/rpg', false),
     new menuItem('Magic Est', '/mtg', false),
-    new menuItem('Discord', discordUrl as string, true),
     new menuItem('A körről', '/about', false),
   ];
 
@@ -70,14 +74,20 @@ export default function Header() {
             <ThemeSwitcher />
           </NavbarItem>
           <NavbarItem>
-            <Link href={discordUrl} showAnchorIcon isExternal className="text-sm md:text-base">
-              <p className="flex flex-row items-center">Discord</p>
+            <Link href="/profile" className="text-sm md:text-base">
+              Profil
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/about" className="text-sm md:text-base">
-              A körről
-            </Link>
+            {!session?.user ? (
+              <button className="text-sm md:text-base" onClick={() => signIn('discord')}>
+                Bejelentkezés
+              </button>
+            ) : (
+              <button className="text-sm md:text-base" onClick={() => signOut({ redirectTo: '/' })}>
+                Kijelentkezés
+              </button>
+            )}
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>
