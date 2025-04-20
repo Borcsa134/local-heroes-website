@@ -10,6 +10,7 @@
     "lint": "next lint --fix",
     "test": "jest",
     "slicemachine": "start-slicemachine",
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "postinstall": "prisma generate"
   },
   "dependencies": {
