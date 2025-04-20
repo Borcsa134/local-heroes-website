@@ -1,11 +1,11 @@
 'use client';
-import { CalendarDate, getLocalTimeZone, parseDateTime, toCalendarDate, today, toZoned } from '@internationalized/date';
 import { Calendar } from '@heroui/calendar';
 import { DateValue, ScrollShadow } from '@heroui/react';
-import { I18nProvider } from '@react-aria/i18n';
+import { CalendarDate, getLocalTimeZone, parseDateTime, toCalendarDate, today, toZoned } from '@internationalized/date';
 import Link from 'next/link';
 import { OstDocument } from 'outstatic';
 import React from 'react';
+import { I18nProvider } from 'react-aria';
 
 import EventBadge from './eventBadge';
 
