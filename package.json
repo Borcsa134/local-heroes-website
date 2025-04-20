@@ -9,7 +9,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "test": "jest",
-    "slicemachine": "start-slicemachine"
+    "slicemachine": "start-slicemachine",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
