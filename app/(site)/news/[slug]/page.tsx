@@ -7,14 +7,9 @@ import { getDocumentBySlug, getDocumentSlugs } from 'outstatic/server';
 import Breadcrumb from '@/app/components/breadCrumb';
 import convertToOpenGraph from '@/app/utils/metadata';
 
-interface Props {
-  params: {
-    slug: string;
-  };
-}
-
-export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
-  const news = await getData(props);
+export async function generateMetadata(props, parent: ResolvingMetadata): Promise<Metadata> {
+  const params = await props.params;
+  const news = await getData(params);
 
   const openGraph = convertToOpenGraph((await parent).openGraph);
 
@@ -27,7 +22,8 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
   };
 }
 
-async function getData({ params }: Props) {
+async function getData(params) {
+  console.log(params.slug);
   const post = getDocumentBySlug('news', params.slug, [
     'title',
     'publishedAt',
@@ -49,8 +45,9 @@ async function getData({ params }: Props) {
   };
 }
 
-export default async function News(props: Props) {
-  const news = await getData(props);
+export default async function News(props) {
+  const params = await props.params;
+  const news = await getData(params);
   const date = new Date(news.publishedAt);
   return (
     <div>
