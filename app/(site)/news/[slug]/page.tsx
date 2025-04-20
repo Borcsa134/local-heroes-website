@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { marked } from 'marked';
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Metadata, ResolvingMetadata } from 'next';
 import { OstDocument } from 'outstatic';
 import { getDocuments } from 'outstatic/server';
