@@ -23,17 +23,6 @@ export async function generateMetadata(props, parent: ResolvingMetadata): Promis
   };
 }
 
-async function getSlugs(collectionName) {
-  const payload = await getPayload({ config });
-  const collectionObject = await payload.find({
-    collection: collectionName,
-    select: {
-      slug: true,
-    },
-  });
-  return collectionObject.docs;
-}
-
 async function getData(params) {
   const payload = await getPayload({ config });
   const newsObject = await payload.find({
@@ -58,7 +47,7 @@ export default async function Events(props) {
       <div
         className="flex flex-col w-full min-h-60 max-h-60 p-4"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
+          backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage && typeof event.coverImage == 'object' && event.coverImage.url})`,
           backgroundSize: 'cover',
           borderRadius: '6px',
         }}
@@ -71,9 +60,4 @@ export default async function Events(props) {
       <RichText data={event.content} />
     </div>
   );
-}
-
-export async function generateStaticParams() {
-  const event = await getSlugs('events');
-  return event.map(({ slug }) => ({ slug }));
 }
