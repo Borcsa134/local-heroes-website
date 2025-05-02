@@ -23,17 +23,6 @@ export async function generateMetadata(props, parent: ResolvingMetadata): Promis
   };
 }
 
-async function getSlugs(collectionName) {
-  const payload = await getPayload({ config });
-  const collectionObject = await payload.find({
-    collection: collectionName,
-    select: {
-      slug: true,
-    },
-  });
-  return collectionObject.docs;
-}
-
 async function getData(params) {
   const payload = await getPayload({ config });
   const newsObject = await payload.find({
