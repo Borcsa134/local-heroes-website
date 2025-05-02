@@ -1,3 +1,4 @@
+import { withPayload } from '@payloadcms/next/withPayload';
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   webpack: (config, context) => {
@@ -16,15 +17,6 @@ const nextConfig = {
   env: {
     DISCORD_URL: process.env.DISCORD_URL,
   },
-  redirects: () => {
-    return [
-      {
-        source: '/admin',
-        destination: '/outstatic',
-        permanent: true,
-      },
-    ];
-  },
 };
 
-module.exports = nextConfig;
+export default withPayload(nextConfig);

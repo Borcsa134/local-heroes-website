@@ -1,27 +1,29 @@
 'use client';
 import { Calendar } from '@heroui/calendar';
 import { DateValue, ScrollShadow } from '@heroui/react';
-import { CalendarDate, getLocalTimeZone, parseDateTime, toCalendarDate, today, toZoned } from '@internationalized/date';
+import {
+  CalendarDate,
+  getLocalTimeZone,
+  parseAbsoluteToLocal,
+  parseDateTime,
+  toCalendarDate,
+  today,
+} from '@internationalized/date';
 import Link from 'next/link';
-import { OstDocument } from 'outstatic';
 import React from 'react';
 import { I18nProvider } from 'react-aria';
 
+import { Event } from '@/payload-types';
+
 import EventBadge from './eventBadge';
 
-type Events = OstDocument<{
-  [key: string]: unknown;
-}>;
-
 interface Props {
-  events: Events[];
+  events: Event[];
 }
 
-function getUpcomingEvents(events: Events[], currentDate: CalendarDate) {
+function getUpcomingEvents(events: Event[], currentDate: CalendarDate) {
   return events
-    .filter(
-      (event) => toCalendarDate(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) >= currentDate,
-    )
+    .filter((event) => toCalendarDate(parseAbsoluteToLocal(event.eventDate as string)) >= currentDate)
     .sort((a, b) => parseDateTime(a.eventDate as string).compare(parseDateTime(b.eventDate as string)));
 }
 
@@ -32,9 +34,8 @@ export default function CalendarBadge(props: Props) {
 
   const isDateUnavailable = (date: DateValue) => {
     return (
-      props.events.every(
-        (event) => date.compare(toZoned(parseDateTime(event.eventDate as string), getLocalTimeZone())) != 0,
-      ) && date.compare(dateToday) != 0
+      props.events.every((event) => date.compare(parseAbsoluteToLocal(event.eventDate as string)) != 0) &&
+      date.compare(dateToday) != 0
     );
   };
 

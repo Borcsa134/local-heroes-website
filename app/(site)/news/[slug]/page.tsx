@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { marked } from 'marked';
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getDocumentBySlug, getDocumentSlugs } from 'outstatic/server';
+import { getPayload } from 'payload';
 
 import Breadcrumb from '@/app/components/breadCrumb';
+import { RichText } from '@/app/components/richText';
 import convertToOpenGraph from '@/app/utils/metadata';
+import config from '@payload-config';
 
 export async function generateMetadata(props, parent: ResolvingMetadata): Promise<Metadata> {
   const params = await props.params;
@@ -22,27 +23,29 @@ export async function generateMetadata(props, parent: ResolvingMetadata): Promis
   };
 }
 
-async function getData(params) {
-  console.log(params.slug);
-  const post = getDocumentBySlug('news', params.slug, [
-    'title',
-    'publishedAt',
-    'slug',
-    'author',
-    'content',
-    'coverImage',
-  ]);
+async function getSlugs(collectionName) {
+  const payload = await getPayload({ config });
+  const collectionObject = await payload.find({
+    collection: collectionName,
+    select: {
+      slug: true,
+    },
+  });
+  return collectionObject.docs;
+}
 
-  if (!post) {
+async function getData(params) {
+  const payload = await getPayload({ config });
+  const newsObject = await payload.find({
+    collection: 'news',
+    where: { slug: { equals: params.slug } },
+  });
+
+  if (newsObject.docs.length === 0) {
     notFound();
   }
 
-  const content = (await marked.parse(post.content || '')).replaceAll('<a', '<a target="_blank"');
-
-  return {
-    ...post,
-    content,
-  };
+  return newsObject.docs[0];
 }
 
 export default async function News(props) {
@@ -54,12 +57,12 @@ export default async function News(props) {
       <Breadcrumb />
       <h1 className="text-4xl text-center py-4">{news.title}</h1>
       <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>
-      <div dangerouslySetInnerHTML={{ __html: news.content }} className="pt-4 marked" />
+      <RichText data={news.content} />
     </div>
   );
 }
 
 export async function generateStaticParams() {
-  const news = getDocumentSlugs('news');
-  return news.map((slug) => ({ slug }));
+  const news = await getSlugs('news');
+  return news.map(({ slug }) => ({ slug }));
 }

@@ -1,9 +1,11 @@
 import { Metadata, ResolvingMetadata } from 'next';
 import Link from 'next/link';
-import { getDocuments } from 'outstatic/server';
+import { notFound } from 'next/navigation';
+import { getPayload } from 'payload';
 
 import NewsBadge from '@/app/components/newsBadge';
 import convertToOpenGraph from '@/app/utils/metadata';
+import config from '@payload-config';
 
 interface Props {}
 
@@ -20,9 +22,17 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
 }
 
 async function getData() {
-  const news = getDocuments('news', ['title', 'slug', 'coverImage', 'publishedAt']);
+  const payload = await getPayload({ config });
+  const newsObject = await payload.find({
+    collection: 'news',
+    where: { publishedAt: { not_equals: null } },
+  });
 
-  return news;
+  if (newsObject.docs.length === 0) {
+    notFound();
+  }
+
+  return newsObject.docs;
 }
 
 export default async function News() {

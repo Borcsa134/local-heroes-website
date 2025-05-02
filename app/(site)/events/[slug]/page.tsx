@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { marked } from 'marked';
 import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getDocumentBySlug, getDocumentSlugs } from 'outstatic/server';
+import { getPayload } from 'payload';
 
 import Breadrumb from '@/app/components/breadCrumb';
+import { RichText } from '@/app/components/richText';
 import convertToOpenGraph from '@/app/utils/metadata';
+import config from '@payload-config';
 
 export async function generateMetadata(props, parent: ResolvingMetadata): Promise<Metadata> {
   const params = await props.params;
@@ -22,28 +23,29 @@ export async function generateMetadata(props, parent: ResolvingMetadata): Promis
   };
 }
 
-async function getData(params) {
-  const post = getDocumentBySlug('events', params.slug, [
-    'title',
-    'content',
-    'slug',
-    'coverImage',
-    'publishedAt',
-    'discordChannel',
-    'regularEvent',
-    'author',
-  ]);
+async function getSlugs(collectionName) {
+  const payload = await getPayload({ config });
+  const collectionObject = await payload.find({
+    collection: collectionName,
+    select: {
+      slug: true,
+    },
+  });
+  return collectionObject.docs;
+}
 
-  if (!post) {
+async function getData(params) {
+  const payload = await getPayload({ config });
+  const newsObject = await payload.find({
+    collection: 'events',
+    where: { slug: { equals: params.slug } },
+  });
+
+  if (newsObject.docs.length === 0) {
     notFound();
   }
 
-  const content = await marked.parse(post.content || '');
-
-  return {
-    ...post,
-    content,
-  };
+  return newsObject.docs[0];
 }
 
 export default async function Events(props) {
@@ -54,7 +56,7 @@ export default async function Events(props) {
     <div>
       <Breadrumb />
       <div
-        className="flex flex-col w-100 min-h-60 max-h-60 p-4"
+        className="flex flex-col w-full min-h-60 max-h-60 p-4"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
           backgroundSize: 'cover',
@@ -63,15 +65,15 @@ export default async function Events(props) {
       >
         <h1 className="text-left text-3xl sm:text-4xl pb-4">{event.title}</h1>
         <p className="text-left italic text-sm">
-          {event.author!.name} - {date.toLocaleDateString('hu-HU')}
+          {event.author} - {date.toLocaleDateString('hu-HU')}
         </p>
       </div>
-      <div dangerouslySetInnerHTML={{ __html: event.content }} className="pt-4 marked" />
+      <RichText data={event.content} />
     </div>
   );
 }
 
 export async function generateStaticParams() {
-  const event = getDocumentSlugs('events');
-  return event.map((slug) => ({ slug }));
+  const event = await getSlugs('events');
+  return event.map(({ slug }) => ({ slug }));
 }
