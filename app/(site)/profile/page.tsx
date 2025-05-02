@@ -8,7 +8,7 @@ export default async function Profile() {
   const session = await auth();
 
   if (session?.user?.name && session.user.email) {
-    const user = await db.users.findFirst({ where: { email: session.user.email } });
+    const user = await db.discordUsers.findFirst({ where: { email: session.user.email } });
     if (user?.username && user?.email) {
       return (
         <div className="flex justify-between px-10">
