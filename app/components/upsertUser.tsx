@@ -5,7 +5,7 @@ export async function upsertUser(prevState, formData: FormData) {
   const _eslintIgnore = prevState;
   const data = Object.fromEntries(formData);
 
-  await db.users.upsert({
+  await db.discordUsers.upsert({
     where: {
       email: data.email as string,
     },
