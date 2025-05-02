@@ -61,8 +61,3 @@ export default async function News(props) {
     </div>
   );
 }
-
-export async function generateStaticParams() {
-  const news = await getSlugs('news');
-  return news.map(({ slug }) => ({ slug }));
-}
