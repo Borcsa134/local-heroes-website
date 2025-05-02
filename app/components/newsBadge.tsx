@@ -1,16 +1,15 @@
 import { Card, CardBody } from '@heroui/card';
 import { Image } from '@heroui/image';
-import { OstDocument } from 'outstatic';
+
+import { News } from '@/payload-types';
 
 type Props = {
-  news: OstDocument<{
-    [key: string]: unknown;
-  }>;
+  news: News;
 };
 
 export default function NewsBadge(props: Props) {
   const { news } = props;
-  const date = new Date(news.publishedAt);
+  const date = new Date(news.createdAt);
   return (
     <Card className="py-3">
       <CardBody className="flex flex-row overflow-visible justify-between py-0 min-h-[120px] max-h-[120px]">
@@ -18,12 +17,14 @@ export default function NewsBadge(props: Props) {
           <p className="italic pb-2">{date.toLocaleDateString('hu-HU')}</p>
           <p className="text-xl md:text-2xl uppercase font-bold">{news.title}</p>
         </div>
-        <Image
-          removeWrapper
-          alt="Card background"
-          className="z-0 object-contain rounded-xl w-[100px]"
-          src={news.coverImage}
-        />
+        {news.coverImage && typeof news.coverImage == 'object' && (
+          <Image
+            removeWrapper
+            alt="Card background"
+            className="z-0 object-contain rounded-xl w-[100px]"
+            src={news.coverImage?.url}
+          />
+        )}
       </CardBody>
     </Card>
   );

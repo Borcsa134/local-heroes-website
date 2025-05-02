@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { Metadata, ResolvingMetadata } from 'next';
-import { OstDocument } from 'outstatic';
-import { getDocuments } from 'outstatic/server';
+import { notFound } from 'next/navigation';
+import { getPayload } from 'payload';
 
 import CalendarBadge from '@/app/components/calendarBadge';
 import EventBadge from '@/app/components/eventBadge';
 import convertToOpenGraph from '@/app/utils/metadata';
-
-type Events = OstDocument<{
-  [key: string]: unknown;
-}>;
+import { Event } from '@/payload-types';
+import config from '@payload-config';
 
 interface Props {}
 
@@ -26,32 +24,33 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
 }
 
 async function getData() {
-  const events = getDocuments('events', [
-    'title',
-    'content',
-    'slug',
-    'coverImage',
-    'publishedAt',
-    'discordChannel',
-    'regularEvent',
-    'eventDate',
-  ]);
+  const payload = await getPayload({ config });
+  const newsObject = await payload.find({
+    collection: 'events',
+    where: { publishedAt: { not_equals: null } },
+  });
 
-  return events;
+  if (newsObject.docs.length === 0) {
+    notFound();
+  }
+
+  return newsObject.docs;
 }
 
-async function getRegularEvents(events: Events[]) {
-  return events.filter((event) => event.regularEvent === 'true');
+async function getRegularEvents(events: Event[]) {
+  return events.filter((event) => event.regularEvent === true);
 }
 
-async function getOtherEvents(events: Events[]) {
-  return events.filter((event) => event.regularEvent === '' || event.regularEvent === 'false');
+async function getOtherEvents(events: Event[]) {
+  return events.filter((event) => event.regularEvent === false);
 }
 
 export default async function Events() {
   const events = await getData();
   const regularEvents = await getRegularEvents(events);
   const otherEvents = await getOtherEvents(events);
+
+  console.log(events);
 
   return (
     <div className="lg:w-[990px]">
