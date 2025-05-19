@@ -42,7 +42,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await auth();
 
   return (
-    <html lang="en" className="text-foreground bg-background dark" style={{ colorScheme: 'dark' }}>
+    <html
+      lang="en"
+      className="text-foreground bg-background dark"
+      style={{ colorScheme: 'dark' }}
+      suppressHydrationWarning
+    >
       <body className={inter.className}>
         <Providers>
           <Header session={session} />
