@@ -7,6 +7,7 @@ import sharp from 'sharp';
 import { Events } from './collections/events';
 import { Media } from './collections/media';
 import { News } from './collections/news';
+import { DiscordUsers, PrismaMigrations } from './prisma/drizzle/schema';
 
 export default buildConfig({
   editor: lexicalEditor(),
@@ -21,6 +22,18 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL,
     },
+    beforeSchemaInit: [
+      ({ schema }) => {
+        return {
+          ...schema,
+          tables: {
+            ...schema.tables,
+            DiscordUsers,
+            PrismaMigrations,
+          },
+        };
+      },
+    ],
   }),
   sharp,
   plugins: [
