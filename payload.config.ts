@@ -7,13 +7,32 @@ import sharp from 'sharp';
 import { Events } from './collections/events';
 import { Media } from './collections/media';
 import { News } from './collections/news';
+import { Users } from './collections/Users/config';
 import { DiscordUsers, PrismaMigrations } from './prisma/drizzle/schema';
+import Seed from './utils/seed';
 
 export default buildConfig({
   editor: lexicalEditor(),
   cors: '*',
 
-  collections: [News, Events, Media],
+  collections: [News, Events, Media, Users],
+
+  admin: {
+    user: Users.slug,
+    autoLogin:
+      process.env.PAYLOAD_ENABLE_AUTOLOGIN === 'true'
+        ? {
+            email: 'admin@local.com',
+            password: 'password',
+          }
+        : false,
+  },
+
+  onInit: async (payload) => {
+    if (process.env.PAYLOAD_ENABLE_AUTOLOGIN === 'true') {
+      await Seed(payload);
+    }
+  },
 
   typescript: {},
 
