@@ -61,7 +61,7 @@ export default function ProfileForm({ username, email, fullname }: Props) {
         type="text"
         value={value}
         onValueChange={setValue}
-        // defaultValue={fullname}
+        defaultValue={fullname}
       />
       <Button type="submit" variant="bordered" isDisabled={pending}>
         Mentés
