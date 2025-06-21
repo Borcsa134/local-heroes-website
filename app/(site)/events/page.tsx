@@ -50,8 +50,6 @@ export default async function Events() {
   const regularEvents = await getRegularEvents(events);
   const otherEvents = await getOtherEvents(events);
 
-  console.log(events);
-
   return (
     <div className="lg:w-[990px]">
       <h1 className="text-4xl text-center py-4">Állandó események</h1>
