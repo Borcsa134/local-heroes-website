@@ -34,8 +34,8 @@ export default function CalendarBadge(props: Props) {
 
   const isDateUnavailable = (date: DateValue) => {
     return (
-      props.events.every((event) => date.compare(parseAbsoluteToLocal(event.eventDate as string)) != 0) &&
-      date.compare(dateToday) != 0
+      props.events.every((event) => date.compare(parseAbsoluteToLocal(event.eventDate as string)) != 0)
+      && date.compare(dateToday) != 0
     );
   };
 

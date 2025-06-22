@@ -11,6 +11,7 @@
     "no-unused-vars": "off",
     "no-undef": "error",
     "@typescript-eslint/no-unsafe-argument": "error",
+    "operator-linebreak": ["error", "before"],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
@@ -20,8 +21,8 @@
         "caughtErrorsIgnorePattern": "^_",
         "destructuredArrayIgnorePattern": "^_",
         "varsIgnorePattern": "^_",
-        "ignoreRestSiblings": true
-      }
+        "ignoreRestSiblings": true,
+      },
     ],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [

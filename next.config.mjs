@@ -17,6 +17,9 @@ const nextConfig = {
   env: {
     DISCORD_URL: process.env.DISCORD_URL,
   },
+  eslint: {
+    dirs: ['app', 'collections', 'utils'],
+  },
 };
 
 export default withPayload(nextConfig);
