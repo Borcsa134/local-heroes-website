@@ -4,6 +4,10 @@ import { generateSlug, validateSlug } from './utils/slug';
 
 export const Events: CollectionConfig = {
   slug: 'events',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'author', 'eventDate', 'regularEvent', 'publishedAt', 'published'],
+  },
   fields: [
     {
       name: 'title',

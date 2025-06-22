@@ -4,6 +4,10 @@ import { generateSlug, validateSlug } from './utils/slug';
 
 export const News: CollectionConfig = {
   slug: 'news',
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'author', 'publishedAt', 'published'],
+  },
   fields: [
     {
       name: 'title',
