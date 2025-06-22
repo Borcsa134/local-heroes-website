@@ -9,9 +9,9 @@ datasource db {
 
 model events {
   id                            Int                             @id @default(autoincrement())
-  title                         String?                         @db.VarChar
+  title                         String                          @unique(map: "events_title_idx") @db.VarChar
   author                        String?                         @db.VarChar
-  slug                          String?                         @db.VarChar
+  slug                          String?                         @unique(map: "events_slug_idx") @db.VarChar
   cover_image_id                Int?
   event_date                    DateTime?                       @db.Timestamptz(3)
   regular_event                 Boolean?                        @default(false)
@@ -73,10 +73,10 @@ model media {
 
 model news {
   id                            Int                             @id @default(autoincrement())
-  title                         String?                         @db.VarChar
+  title                         String                          @unique(map: "news_title_idx") @db.VarChar
   published                     Boolean?                        @default(false)
   author                        String?                         @db.VarChar
-  slug                          String?                         @db.VarChar
+  slug                          String?                         @unique(map: "news_slug_idx") @db.VarChar
   updated_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   created_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   content                       Json?
@@ -167,16 +167,17 @@ model payload_preferences_rels {
 
 model users {
   id                            Int                             @id @default(autoincrement())
-  role                          enum_users_role                 @default(editor)
-  updated_at                    DateTime                        @default(now()) @db.Timestamptz(3)
-  created_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   email                         String                          @unique(map: "users_email_idx") @db.VarChar
-  reset_password_token          String?                         @db.VarChar
-  reset_password_expiration     DateTime?                       @db.Timestamptz(3)
-  salt                          String?                         @db.VarChar
+  created_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   hash                          String?                         @db.VarChar
-  login_attempts                Decimal?                        @default(0) @db.Decimal
   lock_until                    DateTime?                       @db.Timestamptz(3)
+  login_attempts                Decimal?                        @default(0) @db.Decimal
+  reset_password_expiration     DateTime?                       @db.Timestamptz(3)
+  reset_password_token          String?                         @db.VarChar
+  salt                          String?                         @db.VarChar
+  updated_at                    DateTime                        @default(now()) @db.Timestamptz(3)
+  role                          enum_users_role                 @default(editor)
+  name                          String?                         @default("editor") @db.VarChar
   payload_locked_documents_rels payload_locked_documents_rels[]
   payload_preferences_rels      payload_preferences_rels[]
 

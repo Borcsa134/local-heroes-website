@@ -30,5 +30,10 @@ export const Users: CollectionConfig = {
         update: ({ req: { user } }) => user?.role === 'admin',
       },
     },
+    {
+      name: 'name',
+      type: 'text',
+      defaultValue: 'editor',
+    },
   ],
 };

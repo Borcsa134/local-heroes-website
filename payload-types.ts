@@ -123,8 +123,14 @@ export interface UserAuthOperations {
  */
 export interface News {
   id: number;
-  title?: string | null;
+  title: string;
+  /**
+   * Automatically generated after creation.
+   */
   author?: string | null;
+  /**
+   * Automatically generated from title if left blank.
+   */
   slug?: string | null;
   coverImage?: (number | null) | Media;
   content?: {
@@ -142,8 +148,8 @@ export interface News {
     };
     [k: string]: unknown;
   } | null;
-  published?: boolean | null;
   publishedAt?: string | null;
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -198,8 +204,14 @@ export interface Media {
  */
 export interface Event {
   id: number;
-  title?: string | null;
+  title: string;
+  /**
+   * Automatically generated after creation.
+   */
   author?: string | null;
+  /**
+   * Automatically generated from title if left blank.
+   */
   slug?: string | null;
   coverImage?: (number | null) | Media;
   eventDate?: string | null;
@@ -219,8 +231,8 @@ export interface Event {
     };
     [k: string]: unknown;
   } | null;
-  published?: boolean | null;
   publishedAt?: string | null;
+  published?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -231,6 +243,7 @@ export interface Event {
 export interface User {
   id: number;
   role: 'admin' | 'editor';
+  name?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -317,8 +330,8 @@ export interface NewsSelect<T extends boolean = true> {
   slug?: T;
   coverImage?: T;
   content?: T;
-  published?: T;
   publishedAt?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -334,8 +347,8 @@ export interface EventsSelect<T extends boolean = true> {
   eventDate?: T;
   regularEvent?: T;
   content?: T;
-  published?: T;
   publishedAt?: T;
+  published?: T;
   updatedAt?: T;
   createdAt?: T;
 }
@@ -397,6 +410,7 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface UsersSelect<T extends boolean = true> {
   role?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;

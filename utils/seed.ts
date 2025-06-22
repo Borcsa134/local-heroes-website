@@ -19,6 +19,7 @@ export default async function Seed(payload: Payload) {
         email: 'admin@local.com',
         password: 'password',
         role: 'admin',
+        name: 'Admin',
       },
     });
     console.log('Created default admin user');
@@ -40,6 +41,7 @@ export default async function Seed(payload: Payload) {
         email: 'editor@local.com',
         password: 'password',
         role: 'editor',
+        name: 'Editor',
       },
     });
     console.log('Created default editor user');

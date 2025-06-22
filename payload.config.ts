@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { Events } from './collections/events';
 import { Media } from './collections/media';
 import { News } from './collections/news';
-import { Users } from './collections/Users/config';
+import { Users } from './collections/users/config';
 import { DiscordUsers, PrismaMigrations } from './prisma/drizzle/schema';
 import Seed from './utils/seed';
 
@@ -22,7 +22,7 @@ export default buildConfig({
     autoLogin:
       process.env.PAYLOAD_ENABLE_AUTOLOGIN === 'true'
         ? {
-            email: 'admin@local.com',
+            email: 'editor@local.com',
             password: 'password',
           }
         : false,

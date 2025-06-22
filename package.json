@@ -9,6 +9,9 @@
     "start": "next start",
     "lint": "next lint --fix",
     "test": "jest",
+    "db:migrate": "prisma migrate dev",
+    "db:reset": "prisma migrate reset",
+    "db:pull": "prisma db pull",
     "slicemachine": "start-slicemachine",
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
     "postinstall": "prisma generate"
@@ -49,6 +52,7 @@
     "react-aria": "^3.34.0",
     "react-dom": "^19.1.0",
     "sharp": "^0.34.1",
+    "slugify": "^1.6.6",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3"
   },
