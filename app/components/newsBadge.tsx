@@ -9,7 +9,7 @@ type Props = {
 
 export default function NewsBadge(props: Props) {
   const { news } = props;
-  const date = new Date(news.createdAt);
+  const date = new Date(news.publishedAt);
   return (
     <Card className="py-3">
       <CardBody className="flex flex-row overflow-visible justify-between py-0 min-h-[120px] max-h-[120px]">
