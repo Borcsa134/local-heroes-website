@@ -12,7 +12,11 @@ import { DiscordUsers, PrismaMigrations } from './prisma/drizzle/schema';
 import Seed from './utils/seed';
 
 export default buildConfig({
-  editor: lexicalEditor(),
+  editor: lexicalEditor({
+    features({ defaultFeatures }) {
+      return [...defaultFeatures.filter((feature) => feature.key !== 'upload')];
+    },
+  }),
   cors: '*',
 
   collections: [News, Events, Media, Users],
@@ -26,6 +30,11 @@ export default buildConfig({
             password: 'password',
           }
         : false,
+    livePreview: {
+      url: ({ data, collectionConfig }) =>
+        `/${collectionConfig.slug}/${data.slug}?adminKey=${process.env.PAYLOAD_LIVE_PREVIEW_SECRET}`,
+      collections: ['news'],
+    },
   },
 
   onInit: async (payload) => {

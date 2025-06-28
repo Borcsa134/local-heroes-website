@@ -5,6 +5,7 @@ import { getPayload } from 'payload';
 
 import NewsBadge from '@/app/components/newsBadge';
 import convertToOpenGraph from '@/app/utils/metadata';
+import { statusIsPublished } from '@/collections/utils/queries';
 import config from '@payload-config';
 
 interface Props {}
@@ -25,7 +26,7 @@ async function getData() {
   const payload = await getPayload({ config });
   const newsObject = await payload.find({
     collection: 'news',
-    where: { publishedAt: { not_equals: null } },
+    where: statusIsPublished,
   });
 
   if (newsObject.docs.length === 0) {

@@ -3,7 +3,7 @@ import { Metadata, ResolvingMetadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 
-import Breadrumb from '@/app/components/breadCrumb';
+import Breadcrumb from '@/app/components/breadCrumb';
 import { RichText } from '@/app/components/richText';
 import convertToOpenGraph from '@/app/utils/metadata';
 import config from '@payload-config';
@@ -43,7 +43,7 @@ export default async function Events(props) {
   const date = new Date(event.publishedAt);
   return (
     <div>
-      <Breadrumb />
+      <Breadcrumb />
       <div
         className="flex flex-col w-full min-h-60 max-h-60 p-4"
         style={{

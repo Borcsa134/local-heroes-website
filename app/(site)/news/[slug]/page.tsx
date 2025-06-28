@@ -4,13 +4,14 @@ import { notFound } from 'next/navigation';
 import { getPayload } from 'payload';
 
 import Breadcrumb from '@/app/components/breadCrumb';
+import { LivePreview } from '@/app/components/livePreview';
 import { RichText } from '@/app/components/richText';
 import convertToOpenGraph from '@/app/utils/metadata';
 import config from '@payload-config';
 
-export async function generateMetadata(props, parent: ResolvingMetadata): Promise<Metadata> {
-  const params = await props.params;
-  const news = await getData(params);
+export async function generateMetadata({ params }, parent: ResolvingMetadata): Promise<Metadata> {
+  const { slug } = await params;
+  const news = await getData(slug);
 
   const openGraph = convertToOpenGraph((await parent).openGraph);
 
@@ -23,26 +24,49 @@ export async function generateMetadata(props, parent: ResolvingMetadata): Promis
   };
 }
 
-async function getData(params) {
+async function getData(slug: string) {
   const payload = await getPayload({ config });
-  const newsObject = await payload.find({
-    collection: 'news',
-    where: { slug: { equals: params.slug } },
-  });
+  const news = await payload
+    .find({
+      collection: 'news',
+      where: { slug: { equals: slug } },
+    })
+    .then((res) => res.docs[0]);
 
-  if (newsObject.docs.length === 0) {
+  if (!news) {
     notFound();
   }
 
-  return newsObject.docs[0];
+  return news;
 }
 
-export default async function News(props) {
-  const params = await props.params;
-  const news = await getData(params);
+export default async function News({ params, searchParams }) {
+  const { slug } = await params;
+  const adminKey = (await searchParams)?.adminKey;
+
+  const payload = await getPayload({ config });
+  const isAdmin = adminKey === process.env.PAYLOAD_LIVE_PREVIEW_SECRET;
+
+  const news = await payload
+    .find({
+      collection: 'news',
+      where: {
+        slug: { equals: slug },
+      },
+      overrideAccess: isAdmin,
+      draft: isAdmin,
+    })
+    .then((res) => res.docs[0]);
+
+  if (!news) {
+    notFound();
+  }
+
   const date = new Date(news.publishedAt);
+
   return (
     <div>
+      {isAdmin && <LivePreview />}
       <Breadcrumb />
       <h1 className="text-4xl text-center py-4">{news.title}</h1>
       <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>

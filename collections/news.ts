@@ -1,19 +1,32 @@
 import type { CollectionConfig } from 'payload';
 
+import { statusIsPublished } from './utils/queries';
 import { generateSlug, validateSlug } from './utils/slug';
 
 export const News: CollectionConfig = {
   slug: 'news',
+  versions: {
+    maxPerDoc: 1,
+    drafts: true,
+  },
+  access: {
+    read: ({ req }) => {
+      if (req.user && req.user.collection === 'users') {
+        return true;
+      }
+
+      return statusIsPublished;
+    },
+  },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'publishedAt', 'published'],
+    defaultColumns: ['title', 'author', 'publishedAt', '_status'],
   },
   fields: [
     {
       name: 'title',
       type: 'text',
       required: true,
-      unique: true,
     },
     {
       name: 'author',
@@ -28,14 +41,17 @@ export const News: CollectionConfig = {
       type: 'text',
       unique: true,
       admin: {
-        description: 'Automatically generated from title if left blank.',
+        readOnly: true,
+        description: 'Automatically generated from title after creation',
       },
       validate: (value: string) => validateSlug(value),
     },
     {
       name: 'coverImage',
-      type: 'upload',
-      relationTo: 'media',
+      type: 'text',
+      admin: {
+        description: 'Use image from the web. Accepts only valid URLs.',
+      },
     },
     {
       type: 'richText',
@@ -48,33 +64,26 @@ export const News: CollectionConfig = {
         readOnly: true,
       },
     },
-    {
-      name: 'published',
-      type: 'checkbox',
-      defaultValue: false,
-    },
   ],
   hooks: {
     beforeChange: [
-      ({ req, operation, data }) => {
-        if (data.published) {
+      ({ req, data, originalDoc }) => {
+        const status = data._status;
+        const prevStatus = originalDoc?._status;
+
+        if (status === 'published') {
           if (!data.publishedAt) {
             data.publishedAt = new Date().toISOString();
           }
-        } else {
+        } else if (status === 'draft' && prevStatus === 'published') {
           data.publishedAt = null;
         }
 
-        if (operation === 'create' && req.user && !data.author) {
+        if (req.user && !data.author) {
           const userName = req.user.name;
           data.author = userName || req.user.email || 'Unknown User';
         }
 
-        return data;
-      },
-    ],
-    beforeValidate: [
-      ({ data }) => {
         if (data?.title && (!data.slug || data.slug.trim() === '')) {
           data.slug = generateSlug(data.title as string);
         }

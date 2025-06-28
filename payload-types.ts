@@ -129,10 +129,51 @@ export interface News {
    */
   author?: string | null;
   /**
+   * Automatically generated from title after creation
+   */
+  slug?: string | null;
+  /**
+   * Use image from the web. Accepts only valid URLs.
+   */
+  coverImage?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  /**
+   * Automatically generated after creation.
+   */
+  author?: string | null;
+  /**
    * Automatically generated from title if left blank.
    */
   slug?: string | null;
   coverImage?: (number | null) | Media;
+  eventDate?: string | null;
+  regularEvent?: boolean | null;
   content?: {
     root: {
       type: string;
@@ -197,44 +238,6 @@ export interface Media {
       filename?: string | null;
     };
   };
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  title: string;
-  /**
-   * Automatically generated after creation.
-   */
-  author?: string | null;
-  /**
-   * Automatically generated from title if left blank.
-   */
-  slug?: string | null;
-  coverImage?: (number | null) | Media;
-  eventDate?: string | null;
-  regularEvent?: boolean | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  publishedAt?: string | null;
-  published?: boolean | null;
-  updatedAt: string;
-  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -331,9 +334,9 @@ export interface NewsSelect<T extends boolean = true> {
   coverImage?: T;
   content?: T;
   publishedAt?: T;
-  published?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
