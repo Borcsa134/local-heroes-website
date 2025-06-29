@@ -27,7 +27,7 @@ export default function Header({ session }: Props) {
     new menuItem('Események', '/events', false),
     new menuItem('Szerepjáték', '/rpg', false),
     new menuItem('Magic Est', '/mtg', false),
-    new menuItem('A körről', '/about', false),
+    new menuItem('Rólunk', '/about', false),
   ];
 
   const toggleMenu = () => {
@@ -66,6 +66,11 @@ export default function Header({ session }: Props) {
           <NavbarItem>
             <Link href="/mtg" className="text-sm md:text-base">
               Magic Est
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/about" className="text-sm md:text-base">
+              Rólunk
             </Link>
           </NavbarItem>
         </NavbarContent>
