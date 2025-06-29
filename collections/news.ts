@@ -1,12 +1,12 @@
 import type { CollectionConfig } from 'payload';
 
 import { statusIsPublished } from './utils/queries';
-import { generateSlug, validateSlug } from './utils/slug';
+import { generateSlug, isSlugChanged, validateImageUrl, validateSlug } from './utils/slug';
 
 export const News: CollectionConfig = {
   slug: 'news',
   versions: {
-    maxPerDoc: 1,
+    maxPerDoc: 2,
     drafts: true,
   },
   access: {
@@ -52,6 +52,7 @@ export const News: CollectionConfig = {
       admin: {
         description: 'Use image from the web. Accepts only valid URLs.',
       },
+      validate: (value: string) => validateImageUrl(value),
     },
     {
       type: 'richText',
@@ -62,6 +63,9 @@ export const News: CollectionConfig = {
       type: 'date',
       admin: {
         readOnly: true,
+        date: {
+          displayFormat: 'yyyy.MM.dd HH:mm',
+        },
       },
     },
   ],
@@ -84,7 +88,10 @@ export const News: CollectionConfig = {
           data.author = userName || req.user.email || 'Unknown User';
         }
 
-        if (data?.title && (!data.slug || data.slug.trim() === '')) {
+        if (
+          data?.title
+          && (!data.slug || data.slug.trim() === '' || isSlugChanged(data.title as string, data.slug as string))
+        ) {
           data.slug = generateSlug(data.title as string);
         }
 

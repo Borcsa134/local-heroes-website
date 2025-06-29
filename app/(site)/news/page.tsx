@@ -39,7 +39,7 @@ async function getData() {
 export default async function News() {
   const newsList = await getData();
   return (
-    <div className="lg:w-[990px]">
+    <div>
       <h1 className="text-4xl text-center py-4">Hírek</h1>
       <ul className="space-y-4">
         {newsList.map((news) => (
