@@ -1,14 +1,7 @@
 'use client';
 import { Calendar } from '@heroui/calendar';
 import { DateValue, ScrollShadow } from '@heroui/react';
-import {
-  CalendarDate,
-  getLocalTimeZone,
-  parseAbsoluteToLocal,
-  parseDateTime,
-  toCalendarDate,
-  today,
-} from '@internationalized/date';
+import { CalendarDate, getLocalTimeZone, parseAbsoluteToLocal, toCalendarDate, today } from '@internationalized/date';
 import Link from 'next/link';
 import React from 'react';
 import { I18nProvider } from 'react-aria';
@@ -21,10 +14,14 @@ interface Props {
   events: Event[];
 }
 
+function convertToCalendarDate(dateString: string) {
+  return toCalendarDate(parseAbsoluteToLocal(dateString));
+}
+
 function getUpcomingEvents(events: Event[], currentDate: CalendarDate) {
   return events
-    .filter((event) => toCalendarDate(parseAbsoluteToLocal(event.eventDate as string)) >= currentDate)
-    .sort((a, b) => parseDateTime(a.eventDate as string).compare(parseDateTime(b.eventDate as string)));
+    .filter((event) => convertToCalendarDate(event.eventDate as string) >= currentDate)
+    .sort((a, b) => convertToCalendarDate(a.eventDate as string).compare(convertToCalendarDate(b.eventDate as string)));
 }
 
 export default function CalendarBadge(props: Props) {
@@ -40,7 +37,7 @@ export default function CalendarBadge(props: Props) {
   };
 
   return (
-    <div className="mb-4 flex sm:flex-row max-h-[315px] justify-between">
+    <div className="mb-4 flex sm:flex-row max-h-[600px] justify-between">
       <I18nProvider locale="hu-HU">
         <Calendar
           value={currentDate}
@@ -50,12 +47,12 @@ export default function CalendarBadge(props: Props) {
           hideDisabledDates
           showMonthAndYearPickers
           classNames={{
-            base: 'hidden sm:block',
+            base: 'hidden sm:block max-h-[315px] mt-5 ml-5',
             cellButton: '!no-underline',
           }}
         ></Calendar>
       </I18nProvider>
-      <ScrollShadow className="grow sm:ml-4">
+      <ScrollShadow className="grow sm:ml-4 px-5 pt-5">
         {upcomingEvents.map((event) => (
           <Link key={event.slug} href={'/events/' + event.slug}>
             <EventBadge key={event.slug} event={event} />

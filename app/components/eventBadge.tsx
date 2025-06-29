@@ -12,11 +12,11 @@ export default function EventBadge(props) {
     <Card
       className={event.regularEvent == 'true' ? regularClassNames : defaultClassNames}
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage && typeof event.coverImage == 'object' && event.coverImage.url})`,
+        backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
         backgroundSize: 'cover',
       }}
     >
-      <CardBody className="flex flex-row overflow-visible justify-between p-0 min-h-[120px] max-h-[120px]">
+      <CardBody className="flex flex-row overflow-visible justify-between p-0 min-h-[150px] max-h-[150px]">
         <div className="flex flex-col justify-between">
           <p className="text-xl md:text-2xl uppercase font-bold pb-2">{event.title}</p>
           {event.regularEvent == true && (

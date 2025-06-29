@@ -168,10 +168,13 @@ export interface Event {
    */
   author?: string | null;
   /**
-   * Automatically generated from title if left blank.
+   * Automatically generated from title after creation
    */
   slug?: string | null;
-  coverImage?: (number | null) | Media;
+  /**
+   * Use image from the web. Accepts only valid URLs.
+   */
+  coverImage?: string | null;
   eventDate?: string | null;
   regularEvent?: boolean | null;
   content?: {
@@ -190,9 +193,10 @@ export interface Event {
     [k: string]: unknown;
   } | null;
   publishedAt?: string | null;
-  published?: boolean | null;
+  shouldUnpublish?: boolean | null;
   updatedAt: string;
   createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -351,9 +355,10 @@ export interface EventsSelect<T extends boolean = true> {
   regularEvent?: T;
   content?: T;
   publishedAt?: T;
-  published?: T;
+  shouldUnpublish?: T;
   updatedAt?: T;
   createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

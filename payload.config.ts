@@ -23,6 +23,7 @@ export default buildConfig({
 
   admin: {
     user: Users.slug,
+    dateFormat: 'yyyy.MM.dd HH:mm',
     autoLogin:
       process.env.PAYLOAD_ENABLE_AUTOLOGIN === 'true'
         ? {
@@ -33,7 +34,7 @@ export default buildConfig({
     livePreview: {
       url: ({ data, collectionConfig }) =>
         `/${collectionConfig.slug}/${data.slug}?adminKey=${process.env.PAYLOAD_LIVE_PREVIEW_SECRET}`,
-      collections: ['news'],
+      collections: ['news', 'events'],
     },
   },
 

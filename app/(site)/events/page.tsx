@@ -51,7 +51,7 @@ export default async function Events() {
   const otherEvents = await getOtherEvents(events);
 
   return (
-    <div className="lg:w-[990px]">
+    <div>
       <h1 className="text-4xl text-center py-4">Állandó események</h1>
       <div className="mb-4 flex flex-col md:flex-row justify-around">
         {regularEvents.map((event) => (

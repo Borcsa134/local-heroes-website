@@ -9,23 +9,23 @@ datasource db {
 
 model events {
   id                            Int                             @id @default(autoincrement())
-  title                         String                          @unique(map: "events_title_idx") @db.VarChar
+  title                         String?                         @unique(map: "events_title_idx") @db.VarChar
   author                        String?                         @db.VarChar
   slug                          String?                         @unique(map: "events_slug_idx") @db.VarChar
-  cover_image_id                Int?
-  event_date                    DateTime?                       @db.Timestamptz(3)
   regular_event                 Boolean?                        @default(false)
   content                       Json?
-  published                     Boolean?                        @default(false)
   published_at                  DateTime?                       @db.Timestamptz(3)
   updated_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   created_at                    DateTime                        @default(now()) @db.Timestamptz(3)
-  media                         media?                          @relation(fields: [cover_image_id], references: [id], onUpdate: NoAction, map: "events_cover_image_id_media_id_fk")
+  status                        enum_events_status?             @default(draft) @map("_status")
+  cover_image                   String?                         @db.VarChar
+  event_date                    DateTime?                       @db.Timestamptz(3)
+  events_v                      events_v[]
   payload_locked_documents_rels payload_locked_documents_rels[]
 
-  @@index([cover_image_id], map: "events_cover_image_idx")
   @@index([created_at])
   @@index([updated_at])
+  @@index([status])
 }
 
 model media {
@@ -60,7 +60,6 @@ model media {
   sizes_tablet_mime_type        String?                         @db.VarChar
   sizes_tablet_filesize         Decimal?                        @db.Decimal
   sizes_tablet_filename         String?                         @db.VarChar
-  events                        events[]
   payload_locked_documents_rels payload_locked_documents_rels[]
 
   @@index([created_at])
@@ -179,6 +178,7 @@ model users {
   name                          String?                         @default("editor") @db.VarChar
   payload_locked_documents_rels payload_locked_documents_rels[]
   payload_preferences_rels      payload_preferences_rels[]
+  users_sessions                users_sessions[]
 
   @@index([created_at])
   @@index([updated_at])
@@ -221,6 +221,49 @@ model news_v {
   @@map("_news_v")
 }
 
+model events_v {
+  id                    Int                            @id @default(dbgenerated("nextval('_events_v_id_seq'::regclass)"))
+  parent_id             Int?
+  version_title         String?                        @db.VarChar
+  version_author        String?                        @db.VarChar
+  version_slug          String?                        @db.VarChar
+  version_regular_event Boolean?                       @default(false)
+  version_content       Json?
+  version_published_at  DateTime?                      @db.Timestamptz(3)
+  version_updated_at    DateTime?                      @db.Timestamptz(3)
+  version_created_at    DateTime?                      @db.Timestamptz(3)
+  version__status       enum__events_v_version_status? @default(draft)
+  created_at            DateTime                       @default(now()) @db.Timestamptz(3)
+  updated_at            DateTime                       @default(now()) @db.Timestamptz(3)
+  latest                Boolean?
+  version_cover_image   String?                        @db.VarChar
+  version_event_date    DateTime?                      @db.Timestamptz(3)
+  events                events?                        @relation(fields: [parent_id], references: [id], onUpdate: NoAction, map: "_events_v_parent_id_events_id_fk")
+
+  @@index([created_at])
+  @@index([latest])
+  @@index([parent_id], map: "_events_v_parent_idx")
+  @@index([updated_at])
+  @@index([version__status], map: "_events_v_version_version__status_idx")
+  @@index([version_created_at], map: "_events_v_version_version_created_at_idx")
+  @@index([version_slug], map: "_events_v_version_version_slug_idx")
+  @@index([version_title], map: "_events_v_version_version_title_idx")
+  @@index([version_updated_at], map: "_events_v_version_version_updated_at_idx")
+  @@map("_events_v")
+}
+
+model users_sessions {
+  order      Int       @map("_order")
+  parent_id  Int       @map("_parent_id")
+  id         String    @id @db.VarChar
+  created_at DateTime? @db.Timestamptz(3)
+  expires_at DateTime  @db.Timestamptz(3)
+  users      users     @relation(fields: [parent_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "users_sessions_parent_id_fk")
+
+  @@index([order], map: "users_sessions_order_idx")
+  @@index([parent_id], map: "users_sessions_parent_id_idx")
+}
+
 enum enum_users_role {
   admin
   editor
@@ -232,6 +275,16 @@ enum enum__news_v_version_status {
 }
 
 enum enum_news_status {
+  draft
+  published
+}
+
+enum enum__events_v_version_status {
+  draft
+  published
+}
+
+enum enum_events_status {
   draft
   published
 }
