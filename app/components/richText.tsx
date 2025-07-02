@@ -9,5 +9,10 @@ type Props = {
 export function RichText(props: Props) {
   const { className, ...rest } = props;
 
-  return <RichTextConverter {...rest} className={`prose dark:prose-invert ${className}`} />;
+  return (
+    <RichTextConverter
+      {...rest}
+      className={`prose dark:prose-invert max-w-full prose-h1:font-bold ${className ?? ''}`}
+    />
+  );
 }

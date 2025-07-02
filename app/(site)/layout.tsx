@@ -1,16 +1,14 @@
 import './globals.css';
 
 import { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import React from 'react';
 
 import Footer from '@/app/components/footer';
 import Header from '@/app/components/header';
 import { auth } from '@/auth';
 
+import { inter, raleway } from './fonts';
 import { Providers } from './providers';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: {
@@ -48,7 +46,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       style={{ colorScheme: 'dark' }}
       suppressHydrationWarning
     >
-      <body className={inter.className}>
+      <body className={`${raleway.variable} ${inter.variable}`}>
         <Providers>
           <Header session={session} />
           <div className="container flex flex-col mx-auto min-h-screen px-4 pt-4 lg:w-[990px]">{children}</div>

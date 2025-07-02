@@ -68,8 +68,10 @@ export default async function News({ params, searchParams }) {
     <div>
       {isAdmin && <LivePreview />}
       <Breadcrumb />
-      <h1 className="text-4xl text-center py-4">{news.title}</h1>
-      <p className="text-center">{date.toLocaleDateString('hu-HU')}</p>
+      <h1 className="text-4xl text-center font-bold py-4">{news.title}</h1>
+      <p className="text-center italic text-sm pb-4">
+        {news.author} - {date.toLocaleDateString('hu-HU')}
+      </p>
       <RichText data={news.content} />
     </div>
   );
