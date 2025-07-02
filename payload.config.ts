@@ -33,7 +33,7 @@ export default buildConfig({
         : false,
     livePreview: {
       url: ({ data, collectionConfig }) =>
-        `/${collectionConfig.slug}/${data.slug}?adminKey=${process.env.PAYLOAD_LIVE_PREVIEW_SECRET}`,
+        `${process.env.NEXT_PUBLIC_BASE_URL}/${collectionConfig.slug}/${data.slug}?adminKey=${process.env.PAYLOAD_LIVE_PREVIEW_SECRET}`,
       collections: ['news', 'events'],
     },
   },
