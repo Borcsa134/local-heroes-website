@@ -1,10 +1,11 @@
 import { postgresAdapter } from '@payloadcms/db-postgres';
-import { lexicalEditor } from '@payloadcms/richtext-lexical';
+import { FixedToolbarFeature, lexicalEditor } from '@payloadcms/richtext-lexical';
 import { s3Storage } from '@payloadcms/storage-s3';
 import { buildConfig } from 'payload';
 import sharp from 'sharp';
 
 import { Events } from './collections/events';
+import { ImageFeature } from './collections/features/imageFeature/feature.server';
 import { Media } from './collections/media';
 import { News } from './collections/news';
 import { Users } from './collections/users/config';
@@ -14,7 +15,7 @@ import Seed from './utils/seed';
 export default buildConfig({
   editor: lexicalEditor({
     features({ defaultFeatures }) {
-      return [...defaultFeatures.filter((feature) => feature.key !== 'upload')];
+      return [...defaultFeatures.filter((feature) => feature.key !== 'upload'), FixedToolbarFeature(), ImageFeature()];
     },
   }),
   cors: '*',
