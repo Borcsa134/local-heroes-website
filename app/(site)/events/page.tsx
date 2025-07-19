@@ -6,6 +6,7 @@ import { getPayload } from 'payload';
 import CalendarBadge from '@/app/components/calendarBadge';
 import EventBadge from '@/app/components/eventBadge';
 import convertToOpenGraph from '@/app/utils/metadata';
+import { statusIsPublished } from '@/collections/utils/queries';
 import { Event } from '@/payload-types';
 import config from '@payload-config';
 
@@ -27,7 +28,8 @@ async function getData() {
   const payload = await getPayload({ config });
   const newsObject = await payload.find({
     collection: 'events',
-    where: { publishedAt: { not_equals: null } },
+    where: statusIsPublished,
+    sort: '-publishedAt',
   });
 
   if (newsObject.docs.length === 0) {

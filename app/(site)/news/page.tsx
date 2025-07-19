@@ -27,6 +27,7 @@ async function getData() {
   const newsObject = await payload.find({
     collection: 'news',
     where: statusIsPublished,
+    sort: '-publishedAt',
   });
 
   if (newsObject.docs.length === 0) {
