@@ -20,7 +20,7 @@ export const Events: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'title',
-    defaultColumns: ['title', 'author', 'eventDate', 'publishedAt', '_status'],
+    defaultColumns: ['title', 'author', 'eventDate', 'publishedAt', 'regularEvent', '_status'],
   },
   fields: [
     {

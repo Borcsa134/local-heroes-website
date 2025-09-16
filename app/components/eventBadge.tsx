@@ -1,5 +1,5 @@
 import { Card, CardBody } from '@heroui/card';
-import { parseAbsoluteToLocal } from '@internationalized/date';
+import { getDayOfWeek, parseAbsoluteToLocal } from '@internationalized/date';
 
 import { RichText } from './richText';
 
@@ -7,6 +7,7 @@ const defaultClassNames = 'p-4 mb-4';
 const regularClassNames = 'p-4 md:first:mr-2 md:[&:nth-child(n+2):nth-last-child(n+2)]:mx-2 md:last:ml-2';
 
 export default function EventBadge(props) {
+  const weekDays = ['hétfő', 'kedd', 'szerda', 'csütörtök', 'péntek', 'szombat', 'vasárnap'];
   const { event } = props;
   return (
     <Card
@@ -32,6 +33,16 @@ export default function EventBadge(props) {
               {parseAbsoluteToLocal(event.eventDate as string)
                 .toDate()
                 .toLocaleString('hu-HU', { timeStyle: 'short', dateStyle: 'short' })}
+            </div>
+          )}
+          {event.regularEvent == true && (
+            <div>
+              Minden héten{' '}
+              {weekDays[getDayOfWeek(parseAbsoluteToLocal(event.eventDate as string), 'hu-HU')]
+                + ' '
+                + parseAbsoluteToLocal(event.eventDate as string)
+                  .toDate()
+                  .toLocaleString('hu-HU', { timeStyle: 'short' })}
             </div>
           )}
         </div>
