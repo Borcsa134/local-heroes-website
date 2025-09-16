@@ -46,8 +46,8 @@ export default function CalendarBadge(props: Props) {
   const nonRegularEvents = getNonRegularEvents(props.events);
   const regularEvents = getRegularEvents(props.events);
 
-  const upcomingEvents = getUpcomingEvents(props.events, currentDate);
   const upcomingNonRegularEvents = getUpcomingEvents(nonRegularEvents, currentDate);
+  const upcomingEvents = [...upcomingNonRegularEvents, ...regularEvents];
 
   const isDateUnavailable = (date: DateValue) => {
     const nonRegularEventAvailable = nonRegularEvents.every(
@@ -93,7 +93,7 @@ export default function CalendarBadge(props: Props) {
             <EventBadge key={event.slug} event={event} />
           </Link>
         ))}
-        {!upcomingEvents.length && (
+        {!(showRegularEvents ? upcomingEvents : upcomingNonRegularEvents).length && (
           <div className="flex flex-col justify-center h-full">
             <p className="text-center italic text-gray-500">A közeljövőben nincs esemény</p>
           </div>
