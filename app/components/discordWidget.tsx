@@ -5,7 +5,7 @@ export default function DiscordWidget() {
       width="350"
       height="500"
       sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
-      className="rounded-md hidden md:block"
+      className="rounded-md md:block"
     ></iframe>
   );
 }
