@@ -81,7 +81,7 @@ export default function CalendarBadge(props: Props) {
         <Switch
           isSelected={showRegularEvents}
           onValueChange={setShowRegularEvents}
-          className="ml-5 mt-5"
+          className="hidden sm:block ml-5 mt-5"
           classNames={{ label: 'ms-5' }}
         >
           Mutasd a heti nyitásokat
