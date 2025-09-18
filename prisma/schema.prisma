@@ -12,6 +12,7 @@ model events {
   title                         String?                         @unique(map: "events_title_idx") @db.VarChar
   author                        String?                         @db.VarChar
   slug                          String?                         @unique(map: "events_slug_idx") @db.VarChar
+  event_date                    DateTime?                       @db.Timestamptz(3)
   regular_event                 Boolean?                        @default(false)
   content                       Json?
   published_at                  DateTime?                       @db.Timestamptz(3)
@@ -19,7 +20,7 @@ model events {
   created_at                    DateTime                        @default(now()) @db.Timestamptz(3)
   status                        enum_events_status?             @default(draft) @map("_status")
   cover_image                   String?                         @db.VarChar
-  event_date                    DateTime?                       @db.Timestamptz(3)
+  summary                       String?                         @db.VarChar
   events_v                      events_v[]
   payload_locked_documents_rels payload_locked_documents_rels[]
 
@@ -238,6 +239,7 @@ model events_v {
   latest                Boolean?
   version_cover_image   String?                        @db.VarChar
   version_event_date    DateTime?                      @db.Timestamptz(3)
+  version_summary       String?                        @db.VarChar
   events                events?                        @relation(fields: [parent_id], references: [id], onUpdate: NoAction, map: "_events_v_parent_id_events_id_fk")
 
   @@index([created_at])

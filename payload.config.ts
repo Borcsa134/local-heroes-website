@@ -45,7 +45,9 @@ export default buildConfig({
     }
   },
 
-  typescript: {},
+  typescript: {
+    autoGenerate: true,
+  },
 
   secret: process.env.PAYLOAD_SECRET || '',
   db: postgresAdapter({

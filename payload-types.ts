@@ -168,15 +168,19 @@ export interface Event {
    */
   author?: string | null;
   /**
-   * Automatically generated from title after creation
+   * Automatically generated from title after creation.
    */
   slug?: string | null;
   /**
    * Use image from the web. Accepts only valid URLs.
    */
   coverImage?: string | null;
-  eventDate?: string | null;
+  eventDate: string;
   regularEvent?: boolean | null;
+  /**
+   * This text is displayed in the events page above the event date.
+   */
+  summary?: string | null;
   content?: {
     root: {
       type: string;
@@ -193,7 +197,6 @@ export interface Event {
     [k: string]: unknown;
   } | null;
   publishedAt?: string | null;
-  shouldUnpublish?: boolean | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -260,6 +263,13 @@ export interface User {
   hash?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
   password?: string | null;
 }
 /**
@@ -353,9 +363,9 @@ export interface EventsSelect<T extends boolean = true> {
   coverImage?: T;
   eventDate?: T;
   regularEvent?: T;
+  summary?: T;
   content?: T;
   publishedAt?: T;
-  shouldUnpublish?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -428,6 +438,13 @@ export interface UsersSelect<T extends boolean = true> {
   hash?: T;
   loginAttempts?: T;
   lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

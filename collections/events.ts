@@ -43,7 +43,7 @@ export const Events: CollectionConfig = {
       unique: true,
       admin: {
         readOnly: true,
-        description: 'Automatically generated from title after creation',
+        description: 'Automatically generated from title after creation.',
       },
       validate: (value: string) => validateSlug(value),
     },
@@ -76,8 +76,15 @@ export const Events: CollectionConfig = {
       defaultValue: false,
     },
     {
-      type: 'richText',
+      name: 'summary',
+      type: 'text',
+      admin: {
+        description: 'This text is displayed in the events page above the event date.',
+      },
+    },
+    {
       name: 'content',
+      type: 'richText',
     },
     {
       name: 'publishedAt',
