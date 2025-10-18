@@ -85,11 +85,17 @@ export default function Header({ session }: Props) {
           </NavbarItem>
           <NavbarItem>
             {!session?.user ? (
-              <button className="text-sm md:text-base" onClick={() => signIn('discord', { redirectTo: '/profile' })}>
+              <button
+                className="text-primary cursor-pointer hover:opacity-80 text-sm md:text-base"
+                onClick={() => signIn('discord', { redirectTo: '/profile' })}
+              >
                 Bejelentkezés
               </button>
             ) : (
-              <button className="text-sm md:text-base" onClick={() => signOut({ redirectTo: '/' })}>
+              <button
+                className="text-primary cursor-pointer hover:opacity-80 text-sm md:text-base"
+                onClick={() => signOut({ redirectTo: '/' })}
+              >
                 Kijelentkezés
               </button>
             )}
