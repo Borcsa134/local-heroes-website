@@ -1,6 +1,8 @@
 import { Card, CardBody } from '@heroui/card';
 import { getDayOfWeek, parseAbsoluteToLocal } from '@internationalized/date';
 
+import { Media } from '@/payload-types';
+
 const defaultClassNames = 'p-4 mb-4';
 const regularClassNames = 'p-4 md:first:mr-2 md:[&:nth-child(n+2):nth-last-child(n+2)]:mx-2 md:last:ml-2';
 
@@ -11,7 +13,7 @@ export default function EventBadge(props) {
     <Card
       className={event.regularEvent == 'true' ? regularClassNames : defaultClassNames}
       style={{
-        backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
+        backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${(event.coverImage as Media)?.sizes.card.url})`,
         backgroundSize: 'cover',
       }}
     >

@@ -132,55 +132,7 @@ export interface News {
    * Automatically generated from title after creation
    */
   slug?: string | null;
-  /**
-   * Use image from the web. Accepts only valid URLs.
-   */
-  coverImage?: string | null;
-  content?: {
-    root: {
-      type: string;
-      children: {
-        type: string;
-        version: number;
-        [k: string]: unknown;
-      }[];
-      direction: ('ltr' | 'rtl') | null;
-      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
-      indent: number;
-      version: number;
-    };
-    [k: string]: unknown;
-  } | null;
-  publishedAt?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  _status?: ('draft' | 'published') | null;
-}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "events".
- */
-export interface Event {
-  id: number;
-  title: string;
-  /**
-   * Automatically generated after creation.
-   */
-  author?: string | null;
-  /**
-   * Automatically generated from title after creation.
-   */
-  slug?: string | null;
-  /**
-   * Use image from the web. Accepts only valid URLs.
-   */
-  coverImage?: string | null;
-  eventDate: string;
-  regularEvent?: boolean | null;
-  /**
-   * This text is displayed in the events page above the event date.
-   */
-  summary?: string | null;
+  coverImage?: (number | null) | Media;
   content?: {
     root: {
       type: string;
@@ -207,7 +159,6 @@ export interface Event {
  */
 export interface Media {
   id: number;
-  alt?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -236,15 +187,49 @@ export interface Media {
       filesize?: number | null;
       filename?: string | null;
     };
-    tablet?: {
-      url?: string | null;
-      width?: number | null;
-      height?: number | null;
-      mimeType?: string | null;
-      filesize?: number | null;
-      filename?: string | null;
-    };
   };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "events".
+ */
+export interface Event {
+  id: number;
+  title: string;
+  /**
+   * Automatically generated after creation.
+   */
+  author?: string | null;
+  /**
+   * Automatically generated from title after creation.
+   */
+  slug?: string | null;
+  coverImage?: (number | null) | Media;
+  eventDate: string;
+  regularEvent?: boolean | null;
+  /**
+   * This text is displayed in the events page above the event date.
+   */
+  summary?: string | null;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: string;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  publishedAt?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -375,7 +360,6 @@ export interface EventsSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -401,16 +385,6 @@ export interface MediaSelect<T extends boolean = true> {
               filename?: T;
             };
         card?:
-          | T
-          | {
-              url?: T;
-              width?: T;
-              height?: T;
-              mimeType?: T;
-              filesize?: T;
-              filename?: T;
-            };
-        tablet?:
           | T
           | {
               url?: T;

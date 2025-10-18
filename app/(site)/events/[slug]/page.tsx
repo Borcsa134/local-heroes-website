@@ -7,6 +7,7 @@ import Breadcrumb from '@/app/components/breadCrumb';
 import { LivePreview } from '@/app/components/livePreview';
 import { RichText } from '@/app/components/richText';
 import convertToOpenGraph from '@/app/utils/metadata';
+import { Media } from '@/payload-types';
 import config from '@payload-config';
 
 export async function generateMetadata({ params }, parent: ResolvingMetadata): Promise<Metadata> {
@@ -51,7 +52,6 @@ export default async function Events({ params, searchParams }) {
     .find({
       collection: 'events',
       where: { slug: { equals: slug } },
-      overrideAccess: isAdmin,
       draft: isAdmin,
     })
     .then((res) => res.docs[0]);
@@ -68,7 +68,7 @@ export default async function Events({ params, searchParams }) {
       <div
         className="flex flex-col w-full min-h-60 max-h-60 p-4 bg-content1 bg-cover bg-center rounded-xl"
         style={{
-          backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${event.coverImage})`,
+          backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${(event.coverImage as Media)?.url})`,
         }}
       >
         <h1 className="text-left text-3xl sm:text-4xl pb-4">{event.title}</h1>

@@ -53,7 +53,6 @@ export default async function News({ params, searchParams }) {
       where: {
         slug: { equals: slug },
       },
-      overrideAccess: isAdmin,
       draft: isAdmin,
     })
     .then((res) => res.docs[0]);

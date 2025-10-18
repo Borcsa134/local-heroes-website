@@ -24,17 +24,17 @@ export async function generateMetadata(props: Props, parent: ResolvingMetadata):
 
 async function getData() {
   const payload = await getPayload({ config });
-  const newsObject = await payload.find({
+  const eventsObject = await payload.find({
     collection: 'events',
     where: statusIsPublished,
     sort: '-publishedAt',
   });
 
-  if (newsObject.docs.length === 0) {
+  if (eventsObject.docs.length === 0) {
     notFound();
   }
 
-  return newsObject.docs;
+  return eventsObject.docs;
 }
 
 export default async function Events() {

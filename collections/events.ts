@@ -1,7 +1,7 @@
 import type { CollectionConfig } from 'payload';
 
 import { statusIsPublished } from './utils/queries';
-import { generateSlug, isSlugChanged, validateImageUrl, validateSlug } from './utils/slug';
+import { generateSlug, isSlugChanged, validateSlug } from './utils/slug';
 
 export const Events: CollectionConfig = {
   slug: 'events',
@@ -49,11 +49,8 @@ export const Events: CollectionConfig = {
     },
     {
       name: 'coverImage',
-      type: 'text',
-      admin: {
-        description: 'Use image from the web. Accepts only valid URLs.',
-      },
-      validate: (value: string) => validateImageUrl(value),
+      type: 'upload',
+      relationTo: 'media',
     },
     {
       name: 'eventDate',
