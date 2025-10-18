@@ -1,10 +1,10 @@
 'use client';
 import { Link, Navbar, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from '@heroui/react';
 import { Session } from 'next-auth';
-import { signIn, signOut } from 'next-auth/react';
 import React from 'react';
 
 import lhLogo from '../../public/lh-logo.svg';
+import LoginButton from './loginButton';
 import { ThemeSwitcher } from './themeSwitcher';
 
 class menuItem {
@@ -28,6 +28,7 @@ export default function Header({ session }: Props) {
     new menuItem('Szerepjáték', '/rpg', false),
     new menuItem('Magic Est', '/mtg', false),
     new menuItem('Rólunk', '/about', false),
+    new menuItem('Profil', '/profile', false),
   ];
 
   const toggleMenu = () => {
@@ -39,6 +40,9 @@ export default function Header({ session }: Props) {
       <Navbar isBordered shouldHideOnScroll isMenuOpen={isMenuOpen} classNames={{ wrapper: 'justify-between px-0' }}>
         <NavbarContent className="sm:hidden">
           <NavbarMenuToggle aria-label={isMenuOpen ? 'Close menu' : 'Open menu'} onClick={() => toggleMenu()} />
+        </NavbarContent>
+        <NavbarContent className="sm:hidden" justify="end">
+          <LoginButton session={session} />
         </NavbarContent>
         <NavbarContent className="hidden gap-4 sm:flex sm:leading-[4rem] " justify="center">
           <NavbarItem>
@@ -75,7 +79,7 @@ export default function Header({ session }: Props) {
           </NavbarItem>
         </NavbarContent>
         <NavbarContent className="hidden sm:flex sm:leading-[4rem]" justify="end">
-          <NavbarItem>
+          <NavbarItem className="hidden md:block">
             <ThemeSwitcher />
           </NavbarItem>
           <NavbarItem>
@@ -84,21 +88,7 @@ export default function Header({ session }: Props) {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            {!session?.user ? (
-              <button
-                className="text-primary cursor-pointer hover:opacity-80 text-sm md:text-base"
-                onClick={() => signIn('discord', { redirectTo: '/profile' })}
-              >
-                Bejelentkezés
-              </button>
-            ) : (
-              <button
-                className="text-primary cursor-pointer hover:opacity-80 text-sm md:text-base"
-                onClick={() => signOut({ redirectTo: '/' })}
-              >
-                Kijelentkezés
-              </button>
-            )}
+            <LoginButton session={session} />
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu>

@@ -20,7 +20,7 @@ export default function NewsBadge(props: Props) {
         {news.coverImage && (
           <Image
             alt="Card background"
-            classNames={{ wrapper: 'z-0 rounded-xl w-[200px]', img: 'w-full h-full object-cover' }}
+            classNames={{ wrapper: 'hidden sm:block z-0 rounded-xl w-[200px]', img: 'w-full h-full object-cover' }}
             src={(news.coverImage as Media)?.sizes.thumbnail.url}
           />
         )}

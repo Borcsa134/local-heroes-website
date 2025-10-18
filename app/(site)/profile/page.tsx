@@ -28,15 +28,15 @@ export default async function Profile() {
     return (
       <div>
         <h1 className="text-4xl text-center py-4">Profil</h1>
-        <div className="flex justify-between px-10">
-          <ProfileForm username={user.username} email={user.email} fullname={user.fullname} />
+        <div className="flex flex-col items-center sm:flex-row sm:justify-between px-10">
           <Image
             removeWrapper
             src={session.user.image as string}
             alt="discord-image"
             radius="full"
-            className="hidden sm:block w-[200px] h-[200px] object-contain ml-6 "
+            className="w-[200px] h-[200px] object-contain mb-6 sm:mr-6 "
           />
+          <ProfileForm username={user.username} email={user.email} fullname={user.fullname} />
         </div>
       </div>
     );
