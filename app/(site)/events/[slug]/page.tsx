@@ -76,7 +76,7 @@ export default async function Events({ params, searchParams }) {
           {event.author} - {date.toLocaleDateString('hu-HU')}
         </p>
       </div>
-      <RichText data={event.content} />
+      <RichText data={event.content} className="pt-4" />
     </div>
   );
 }
