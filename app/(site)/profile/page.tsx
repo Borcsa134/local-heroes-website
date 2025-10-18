@@ -26,18 +26,28 @@ export default async function Profile() {
     }
 
     return (
-      <div className="flex justify-between px-10">
-        <ProfileForm username={user.username} email={user.email} fullname={user.fullname} />
-        <Image
-          removeWrapper
-          src={session.user.image as string}
-          alt="discord-image"
-          radius="full"
-          className="hidden sm:block w-[200px] h-[200px] object-contain ml-6 "
-        />
+      <div>
+        <h1 className="text-4xl text-center py-4">Profil</h1>
+        <div className="flex justify-between px-10">
+          <ProfileForm username={user.username} email={user.email} fullname={user.fullname} />
+          <Image
+            removeWrapper
+            src={session.user.image as string}
+            alt="discord-image"
+            radius="full"
+            className="hidden sm:block w-[200px] h-[200px] object-contain ml-6 "
+          />
+        </div>
       </div>
     );
   }
 
-  return <div>Nem vagy bejelentkezve.</div>;
+  return (
+    <div>
+      <h1 className="text-4xl text-center py-4">Profil</h1>
+      <div className="">
+        <p className="italic text-center text-gray-500">Nem vagy bejelentkezve.</p>
+      </div>
+    </div>
+  );
 }
