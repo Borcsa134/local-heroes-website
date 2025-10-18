@@ -21,7 +21,24 @@ const config = {
     },
   },
   darkMode: 'selector',
-  plugins: [heroui()],
+  plugins: [
+    heroui({
+      themes: {
+        dark: {
+          colors: {
+            background: '#222222',
+            primary: '#fe7814',
+          },
+        },
+        light: {
+          colors: {
+            background: '#eeeeee',
+            primary: '#fe7814',
+          },
+        },
+      },
+    }),
+  ],
 };
 
 export default config;
