@@ -62,7 +62,7 @@ export default function CalendarBadge(props: Props) {
   };
 
   return (
-    <div className="mb-4 flex sm:flex-row max-h-[600px] justify-between">
+    <div className="mb-4 flex sm:flex-row max-h-[750px] justify-between">
       <div>
         <I18nProvider locale="hu-HU">
           <Calendar
