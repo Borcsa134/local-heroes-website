@@ -12,6 +12,7 @@ export default function EventBadge(props) {
   return (
     <Card
       className={event.regularEvent == 'true' ? regularClassNames : defaultClassNames}
+      shadow="sm"
       style={{
         backgroundImage: `linear-gradient(to right, rgba(var(--starting-color)) 20%, rgba(var(--ending-color)) 100%), url(${(event.coverImage as Media)?.sizes.card.url})`,
         backgroundSize: 'cover',
