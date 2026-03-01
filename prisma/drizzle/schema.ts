@@ -1,13 +1,15 @@
-import { integer, pgTable, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
+import { integer, pgSchema, serial, text, timestamp, varchar } from 'drizzle-orm/pg-core';
 
-export const DiscordUsers = pgTable('discord_users', {
+export const dbSchema = pgSchema(process.env.DATABASE_SCHEMA);
+
+export const DiscordUsers = dbSchema.table('discord_users', {
   id: serial('id').notNull().primaryKey(),
   username: text('username').notNull(),
   fullname: text('fullname').notNull(),
   email: text('email').notNull().unique(),
 });
 
-export const PrismaMigrations = pgTable('_prisma_migrations', {
+export const PrismaMigrations = dbSchema.table('_prisma_migrations', {
   id: varchar('id', { length: 36 }).notNull().primaryKey(),
   checksum: varchar('checksum', { length: 64 }).notNull(),
   finished_at: timestamp('finished_at', { withTimezone: true }),
